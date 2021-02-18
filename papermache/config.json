@@ -1,0 +1,54 @@
+{
+    "serverName": "DataCenter",
+    "darkMode": false,
+    "maxthumbs": 2,
+    "pagesize": 100,
+    "hideLores": false,
+    "hideDotFiles": true,
+    "showSymlinkIcons": true,
+    "randomprefix": "{0}",
+    "forcehide": [
+        "papermache",".papermache-config.json"
+    ],
+    "lores": [
+        "lore.md",
+        "readme.md",
+        "readme.markdown",
+        "read.me",
+        "readme.txt",
+        "readme",
+        "license.txt",
+        "license"
+    ],
+    "images": [
+        "jpg",
+        "jpeg",
+        "gif",
+        "png",
+        "bmp",
+        "svg"
+    ],
+    "videos": [
+        "mp4"
+    ],
+    "audio": [
+        "mp3",
+        "flac",
+        "wav",
+        "m4a"
+    ],
+    "markdown": [
+        "md",
+        "markdown"
+    ],
+    "html": [
+        "php",
+        "html",
+        "htm"
+    ],
+    "text": [
+        "txt",
+        "log",
+        "md"
+    ]
+}

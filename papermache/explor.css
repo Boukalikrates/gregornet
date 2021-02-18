@@ -1,0 +1,387 @@
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(fonts/MaterialIcons-Regular.eot);
+    /* For IE6-8 */
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url(fonts/MaterialIcons-Regular.woff2) format('woff2'), url(fonts/MaterialIcons-Regular.woff) format('woff'), url(fonts/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.mode-stream {
+    background-color: black;
+    color: yellow;
+}
+
+.page-content {
+    min-height: calc(100% - 100px);
+}
+
+.title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 150px);
+}
+
+.header-row {
+    padding-right: 0;
+}
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(128, 128, 128, 0.08);
+    padding: 12px 0;
+}
+
+.toolbar>div {
+    display: flex;
+    height: 32px;
+    align-items: center;
+    flex-basis: 200px;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.toolbar .toolbar-left {
+    justify-content: flex-start;
+}
+
+@media screen and (max-width: 960px) {
+    .toolbar .toolbar-center {
+        order: 5;
+        flex-basis: 960px;
+    }
+}
+
+.toolbar .toolbar-right {
+    justify-content: flex-end;
+}
+
+.toolbar>div>* {
+    margin: 0 12px;
+}
+
+.splitpages {
+    width: 24px;
+}
+
+button.pagenumber {
+    min-width: 36px;
+    padding: 0;
+    margin: 0;
+}
+
+.itemph {
+    border: 2px dashed black;
+    padding: 8px;
+    position: absolute;
+    left: -5000px;
+    width: 0;
+    height: 0;
+}
+
+.item {
+    border-radius: 0px;
+    display: block;
+}
+
+.blackitem>* {
+    background-color: black;
+    border: 1px solid yellow;
+    border-radius: 0;
+}
+
+.blackitem .mdl-card__title {
+    font-weight: bold;
+    color: yellow;
+}
+
+.blackitem .mdl-card__supporting-text {
+    color: yellow;
+    font-style: italic;
+}
+
+.item>div {
+    width: auto;
+    height: 100%
+}
+
+.item a {
+    text-decoration: none;
+}
+
+a.dirtitle {
+    color: black;
+    font-weight: normal;
+}
+
+.filtered {
+    display: none;
+}
+
+.dirthumb {
+    flex-grow: 1;
+    height: 100px;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.dirthumbs {
+    display: flex;
+}
+
+.card-dir {
+    min-height: 0;
+}
+.card-image{
+    min-height: 224px;
+}
+.card-image .filetitle, .card-image .cardactions {
+    color: transparent;
+    opacity: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    transition: opacity .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.card-image .cardactions {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    border: none;
+    border-radius: 100%;
+}
+
+.card-image:hover .filetitle, .card-image:hover .cardactions {
+    opacity: 1;
+}
+
+.card-image button {
+    background-color: rgba(0, 0, 0, .2);
+}
+
+.card-html .iframe-holder {
+    overflow: hidden;
+    display: block;
+    height: 150px;
+}
+
+.card-html iframe {
+    transform: scale(0.25);
+    transform-origin: top left;
+    border: none;
+    width: 400%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.dirthumbs {
+    background-color: inherit;
+}
+
+.cardactions {
+    display: flex;
+}
+
+.pagechips {
+    text-align: center;
+    white-space: nowrap;
+    overflow-x: auto;
+    position: relative;
+    scrollbar-width: thin;
+}
+
+.pagechip {
+    cursor: pointer;
+}
+
+.pagebutton {
+    margin: 0 12px;
+    display: block;
+    float: left;
+}
+
+.mode-stream .m:not(.m-stream), .mode-default .m:not(.m-default), .mode-list .m:not(.m-list) {
+    display: none;
+}
+
+.mode-stream main {
+    scrollbar-color: yellow transparent;
+    background-color: #000;
+}
+
+.mode-stream table, .mode-stream td, .mode-stream th {
+    background-color: #000;
+    border: 1px solid yellow;
+    color: yellow;
+}
+
+.mode-stream .toolbar {
+    background-color: transparent;
+}
+
+.mode-stream button {
+    color: yellow;
+}
+
+.mode-stream .toolbar {
+    max-width: 960px;
+    margin: auto;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.stream-image, .lore img, .markdown img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: calc(100vh - 4px);
+    margin: auto;
+}
+
+img.stream-image:hover {
+    background: url(grid.gif);
+}
+
+audio.stream-image {
+    width: 100%;
+}
+
+.stream-holder {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+}
+
+@media screen and (min-width: 1000px) {
+    .stream-holder {
+        /* left: calc(-50vw + 480px); */
+        /* width: 100vw; */
+        overflow-y: scroll;
+        margin: 0 calc(-50vw + 480px);
+    }
+}
+
+.stream-caption {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    width: 100%;
+    opacity: 0;
+}
+
+.stream-image:hover+.stream-caption, .stream-caption:hover {
+    opacity: 1;
+}
+
+.chunk {
+    width: auto;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-end img {
+    display: block;
+    margin: auto;
+}
+
+.loadmore button {
+    display: block;
+    width: 100%;
+}
+
+.listaction {
+    flex-shrink: 0;
+    opacity: 0;
+}
+
+li:hover .listaction {
+    opacity: 1;
+}
+
+#sort-normal i {
+    transition: 200ms cubic-bezier(.4, 0, .2, 1);
+}
+
+#sort-normal.reverse i {
+    transform: translate(-12px, -12px) rotate(-180.01deg);
+}
+
+.mode-stream #globalaudio.reduced:not(:hover) {
+    opacity: 0.1;
+}
+
+.mode-stream #globalaudio {
+    color: yellow;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#globalaudio {
+    background-color: rgb(245, 245, 245);
+    color: black;
+    display: block;
+    /* position: fixed;
+    bottom: 0;
+    left:0; */
+    width: 100%;
+    height: 60px;
+    flex: none;
+    z-index: 2;
+    overflow: hidden;
+    transition: 200ms cubic-bezier(.4, 0, .2, 1);
+}
+
+#globalaudio.reduced {
+    height: 4px;
+}
+
+#audio-show-btn {
+    position: fixed;
+    bottom: -56px;
+    left: 0;
+    margin: 8px;
+    transition: 200ms cubic-bezier(.4, 0, .2, 1);
+}
+
+#globalaudio.reduced #audio-show-btn {
+    bottom: 4px;
+}
+
+#audioprogress {
+    width: 100%;
+    transition: 200ms cubic-bezier(.4, 0, .2, 1);
+}
+
+@keyframes dance {
+    0% {
+        transform: rotate(15deg);
+    }
+    100% {
+        transform: rotate(-15deg);
+    }
+}
+
+/* #audioprogress:hover {
+} */
+
+#audio-output {
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 1.25em;
+}
+.dance{
+    animation: dance 1s alternate ease-in-out infinite;
+    
+}
