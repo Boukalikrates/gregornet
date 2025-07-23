@@ -9,16 +9,16 @@
     <meta name="theme-color" content="">
     <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
     <link rel="stylesheet" media="screen" href="/gregornet/mdl/material.min.css">
-    <link rel="stylesheet" href="/gregornet/explor.css?21">
-    <link rel="stylesheet" href="/gregornet/colors.css?19">
+    <link rel="stylesheet" href="/gregornet/explor.css?22">
+    <link rel="stylesheet" href="/gregornet/colors.css?22">
     <link rel="stylesheet" media="print" href="/gregornet/print.css">
     <link rel="icon" sizes="192x192" href="/gregornet/gregornet2.svg">
-    <link rel="manifest" href="/gregornet/manifest.json?2" />
+    <link rel="manifest" href="/gregornet/manifest.json?22" />
     <script src="/gregornet/mdl/material.min.js"></script>
     <script src="/gregornet/jquery-3.3.1.min.js"></script>
-    <script src="/gregornet/explor.js?19"></script>
-    <script src="/gregornet/loading.js?21"></script>
-    <script src="/gregornet/audio.js?19"></script>
+    <script src="/gregornet/explor.js?22"></script>
+    <script src="/gregornet/loading.js?22"></script>
+    <script src="/gregornet/audio.js?22"></script>
     <title>Gregornet</title>
 </head>
 
@@ -80,14 +80,14 @@
                             <li class="mdl-menu__item modechanger m-stream" data-mode="stream">Stream</li>
                         </ul>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="sort-things1">
-                            <li data-sort='name' title="Name" class="mdl-menu__item sortoption">A-Z</li>
-                            <li data-sort='name' title="Name" class="mdl-menu__item sortoption">Z-A</li>
-                            <li data-sort='modified' title="Date" class="mdl-menu__item sortoption">Newest to Oldest</li>
-                            <li data-sort='modified' title="Date" class="mdl-menu__item sortoption">Oldest to Newest</li>
-                            <li data-sort='size' title="Size" class="mdl-menu__item sortoption">Smallest to Biggest</li>
-                            <li data-sort='size' title="Size" class="mdl-menu__item sortoption">Biggest to Smallest</li>
-                            <li data-sort='type' title="Type" class="mdl-menu__item sortoption">Type Ascending</li>
-                            <li data-sort='type' title="Type" class="mdl-menu__item sortoption">Type Descending</li>
+                            <li data-sort='name' data-reverse="no" title="Name" class="mdl-menu__item sortoption">A-Z</li>
+                            <li data-sort='name' data-reverse="yes"  title="Name" class="mdl-menu__item sortoption">Z-A</li>
+                            <li data-sort='modified' data-reverse="no" title="Date" class="mdl-menu__item sortoption">Newest to Oldest</li>
+                            <li data-sort='modified' data-reverse="yes"  title="Date" class="mdl-menu__item sortoption">Oldest to Newest</li>
+                            <li data-sort='size' data-reverse="no" title="Size" class="mdl-menu__item sortoption">Smallest to Biggest</li>
+                            <li data-sort='size' data-reverse="yes"  title="Size" class="mdl-menu__item sortoption">Biggest to Smallest</li>
+                            <li data-sort='type' data-reverse="no" title="Type" class="mdl-menu__item sortoption">Type Ascending</li>
+                            <li data-sort='type' data-reverse="yes"  title="Type" class="mdl-menu__item sortoption">Type Descending</li>
                             <li data-sort='random' title="Pseudorandom" class="mdl-menu__item sortoption">Pseudorandom</li>
                         </ul>
                         <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="set-color">

@@ -64,7 +64,7 @@ function init() {
     })
 
     $('.sortoption').click(function () {
-        sort($(this).attr('data-sort'))
+        sort($(this).attr('data-sort'), $(this).attr('data-reverse'));
     })
 
     $('.set-color-button').click(function () {
@@ -86,12 +86,9 @@ function init() {
     $('#sort-normal').click(function () {
         if (pathStorage('reverse') == 'yes') {
             pathStorage('reverse', 'no');
-            $('#sort-normal').removeClass('reverse');
         } else {
             pathStorage('reverse', 'yes');
-            $('#sort-normal').addClass('reverse');
         }
-
         sort();
     })
 
@@ -303,9 +300,6 @@ function loadFolder() {
 
     $('.error-5xx , .error-disconnected').hide();
     // listeners();
-    if (pathStorage('reverse') == 'yes') {
-        $('#sort-normal').addClass('reverse');
-    }
 
 
 
@@ -724,7 +718,7 @@ function togglePlayMode() {
     }
 }
 
-function sort(mode) {
+function sort(mode,reverse) {
     if (mode) {
         pathStorage('sort', mode);
     } else if (pathStorage('sort')) {
@@ -732,14 +726,19 @@ function sort(mode) {
     } else {
         mode = pathStorage('sort', 'name');
     }
-    // if (reverse) {
-    //     localStorage['reverse'] = reverse;
-    // } else if (localStorage) {
-    //     reverse = localStorage['reverse'];
-    // } else {
-    //     reverse = localStorage['reverse'] = 'no';
-    // }
-    reverse = pathStorage('reverse');
+    if (reverse){
+        pathStorage('reverse',reverse) ;
+    }else if(pathStorage('reverse')){ 
+        reverse = pathStorage('reverse');
+    }else{
+        reverse = pathStorage('reverse')='no';
+    }
+
+    if (pathStorage('reverse') == 'yes') {
+        $('#sort-normal').addClass('reverse');
+    } else {
+        $('#sort-normal').removeClass('reverse');
+    }
     // $('#sort-things1').text('Sort by ' + $('.sortoption[data-sort=' + mode + ']').attr('title'));
 
     listdir.sort(function (a, b) {
