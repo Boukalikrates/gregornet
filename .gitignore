@@ -1,3 +1,6 @@
 papermache/.vscode
 papermache/thumbs/*
 papermache/__pycache__
+__pycache__
+gregornet.code-workspace
+*.pyc
