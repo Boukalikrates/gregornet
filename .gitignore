@@ -4,3 +4,4 @@ papermache/__pycache__
 __pycache__
 gregornet.code-workspace
 *.pyc
+.vscode

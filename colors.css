@@ -1,0 +1,569 @@
+/* -------------- red -------------- */
+body.folder-color-red:not(.dark) header { 
+    background-color: #D32F2F;
+}
+body.folder-color-red:not(.dark) main{ 
+    background-color: #FFCDD2;
+}
+body.folder-color-red .mdl-chip.chip-colored,
+body.folder-color-red .progressbar{
+    background-color: #F44336;
+    color: black;
+}
+body:not(.dark) .item.folder-color-red .mdl-card{
+    background-color: #EF9A9A;
+}
+body.dark:not(.black) .item.folder-color-red .filetitle,
+body.folder-color-red.dark:not(.black) header {
+    background-color: #B71C1C;
+    color: white;
+}
+body.black .item.folder-color-red .mdl-card,
+body.folder-color-red.black header{
+    outline-color: #F44336;
+    border-color: #F44336;
+}
+body.black .item.folder-color-red .filetitle>i{
+    color: #F44336;
+}
+
+/* -------------- pink -------------- */
+body.folder-color-pink:not(.dark) header{
+    background-color: #C2185B;
+}
+body.folder-color-pink:not(.dark) main{
+    background-color: #F8BBD0;
+}
+body.folder-color-pink .mdl-chip.chip-colored,
+body.folder-color-pink .progressbar{
+    background-color: #E91E63;
+    color: black;
+}
+body:not(.dark) .item.folder-color-pink .mdl-card{
+    background-color: #F48FB1;
+}
+body.dark:not(.black) .item.folder-color-pink .filetitle,
+body.folder-color-pink.dark:not(.black) header  {
+    background-color: #880E4F;
+    color: white;
+}
+body.black .item.folder-color-pink .mdl-card,
+body.folder-color-pink.black header{
+    outline-color: #E91E63;
+    border-color: #E91E63;
+}
+body.black .item.folder-color-pink .filetitle>i{
+    color: #E91E63;
+}
+
+/* -------------- purple -------------- */
+body.folder-color-purple:not(.dark) header{
+    background-color: #7B1FA2;
+}
+body.folder-color-purple:not(.dark) main{
+    background-color: #E1BEE7;
+}
+body.folder-color-purple .mdl-chip.chip-colored,
+body.folder-color-purple .progressbar{
+    background-color: #9C27B0;
+    color: white;
+}
+body:not(.dark) .item.folder-color-purple .mdl-card{
+    background-color: #CE93D8;
+}
+body.dark:not(.black) .item.folder-color-purple .filetitle,
+body.folder-color-purple.dark:not(.black) header  {
+    background-color: #4A148C;
+    color: white;
+}
+body.black .item.folder-color-purple .mdl-card,
+body.folder-color-purple.black header{
+    outline-color: #9C27B0;
+    border-color: #9C27B0;
+}
+body.black .item.folder-color-purple .filetitle>i{
+    color: #9C27B0;
+}
+
+/* -------------- deep-purple -------------- */
+body.folder-color-deep-purple:not(.dark) header{
+    background-color: #512DA8;
+}
+body.folder-color-deep-purple:not(.dark) main{
+    background-color: #D1C4E9;
+}
+body.folder-color-deep-purple .mdl-chip.chip-colored,
+body.folder-color-deep-purple .progressbar{
+    background-color: #673AB7;
+    color: white;
+}
+body:not(.dark) .item.folder-color-deep-purple .mdl-card{
+    background-color: #B39DDB;
+}
+body.dark:not(.black) .item.folder-color-deep-purple .filetitle,
+body.folder-color-deep-purple.dark:not(.black) header {
+    background-color: #311B92;
+    color: white;
+}
+body.black .item.folder-color-deep-purple .mdl-card,
+body.folder-color-deep-purple.black header{
+    outline-color: #673AB7;
+    border-color: #673AB7;
+}
+body.black .item.folder-color-deep-purple .filetitle>i{
+    color: #673AB7;
+}
+
+/* -------------- indigo -------------- */
+body.folder-color-indigo:not(.dark) header{
+    background-color: #303F9F;
+}
+body.folder-color-indigo:not(.dark) main{
+    background-color: #C5CAE9;
+}
+body.folder-color-indigo .mdl-chip.chip-colored,
+body.folder-color-indigo .progressbar{
+    background-color: #3F51B5;
+    color: white;
+}
+body:not(.dark) .item.folder-color-indigo .mdl-card{
+    background-color: #9FA8DA;
+}
+body.dark:not(.black) .item.folder-color-indigo .filetitle,
+body.folder-color-indigo.dark:not(.black) header  {
+    background-color: #1A237E;
+    color: white;
+}
+body.black .item.folder-color-indigo .mdl-card,
+body.folder-color-indigo.black header{
+    outline-color: #3F51B5;
+    border-color: #3F51B5;
+}
+body.black .item.folder-color-indigo .filetitle>i{
+    color: #3F51B5;
+}
+
+/* -------------- blue -------------- */
+body.folder-color-blue:not(.dark) header{
+    background-color: #1976D2;
+}
+body.folder-color-blue:not(.dark) main{
+    background-color: #BBDEFB;
+}
+body.folder-color-blue .mdl-chip.chip-colored,
+body.folder-color-blue .progressbar{
+    background-color: #2196F3;
+    color: black;
+}
+body:not(.dark) .item.folder-color-blue .mdl-card{
+    background-color: #90CAF9;
+}
+body.dark:not(.black) .item.folder-color-blue .filetitle,
+body.folder-color-blue.dark:not(.black) header  {
+    background-color: #0D47A1;
+    color: white;
+}
+body.black .item.folder-color-blue .mdl-card,
+body.folder-color-blue.black header{
+    outline-color: #2196F3;
+    border-color: #2196F3;
+}
+body.black .item.folder-color-blue .filetitle>i{
+    color: #2196F3;
+}
+
+/* -------------- light-blue -------------- */
+body.folder-color-light-blue:not(.dark) header{
+    background-color: #0288D1;
+    color: black;
+}
+body.folder-color-light-blue:not(.dark) main{
+    background-color: #B3E5FC;
+}
+body.folder-color-light-blue .mdl-chip.chip-colored,
+body.folder-color-light-blue .progressbar{
+    background-color: #03A9F4;
+    color: black;
+}
+body:not(.dark) .item.folder-color-light-blue .mdl-card{
+    background-color: #81D4FA;
+}
+body.dark:not(.black) .item.folder-color-light-blue .filetitle,
+body.folder-color-light-blue.dark:not(.black) header  {
+    background-color: #01579B;
+    color: white;
+}
+body.black .item.folder-color-light-blue .mdl-card,
+body.folder-color-light-blue.black header{
+    outline-color: #03A9F4;
+    border-color: #03A9F4;
+}
+body.black .item.folder-color-light-blue .filetitle>i{
+    color: #03A9F4;
+}
+
+/* -------------- cyan -------------- */
+body.folder-color-cyan:not(.dark) header{
+    background-color: #0097A7;
+    color: black;
+}
+body.folder-color-cyan:not(.dark) main{
+    background-color: #B2EBF2;
+}
+body.folder-color-cyan .mdl-chip.chip-colored,
+body.folder-color-cyan .progressbar{
+    background-color: #00BCD4;
+    color: black;
+}
+body:not(.dark) .item.folder-color-cyan .mdl-card{
+    background-color: #80DEEA;
+}
+body.dark:not(.black) .item.folder-color-cyan .filetitle,
+body.folder-color-cyan.dark:not(.black) header  {
+    background-color: #006064;
+    color: white;
+}
+body.black .item.folder-color-cyan .mdl-card,
+body.folder-color-cyan.black header{
+    outline-color: #00BCD4;
+    border-color: #00BCD4;
+}
+body.black .item.folder-color-cyan .filetitle>i{
+    color: #00BCD4;
+}
+
+/* -------------- teal -------------- */
+body.folder-color-teal:not(.dark) header{
+    background-color: #00796B;
+}
+body.folder-color-teal:not(.dark) main{
+    background-color: #B2DFDB;
+}
+body.folder-color-teal .mdl-chip.chip-colored,
+body.folder-color-teal .progressbar{
+    background-color: #009688;
+    color: black;
+}
+body:not(.dark) .item.folder-color-teal .mdl-card{
+    background-color: #80CBC4;
+}
+body.dark:not(.black) .item.folder-color-teal .filetitle,
+body.folder-color-teal.dark:not(.black) header  {
+    background-color: #004D40;
+    color: white;
+}
+body.black .item.folder-color-teal .mdl-card,
+body.folder-color-teal.black header{
+    outline-color: #009688;
+    border-color: #009688;
+}
+body.black .item.folder-color-teal .filetitle>i{
+    color: #009688;
+}
+
+/* -------------- green -------------- */
+body.folder-color-green:not(.dark) header{
+    background-color: #388E3C;
+    color: black;
+}
+body.folder-color-green:not(.dark) main{
+    background-color: #C8E6C9;
+}
+body.folder-color-green .mdl-chip.chip-colored,
+body.folder-color-green .progressbar{
+    background-color: #4CAF50;
+    color: black;
+}
+body:not(.dark) .item.folder-color-green .mdl-card{
+    background-color: #A5D6A7;
+}
+body.dark:not(.black) .item.folder-color-green .filetitle,
+body.folder-color-green.dark:not(.black) header {
+    background-color: #1B5E20;
+    color: white;
+}
+body.black .item.folder-color-green .mdl-card,
+body.folder-color-green.black header{
+    outline-color: #4CAF50;
+    border-color: #4CAF50;
+}
+body.black .item.folder-color-green .filetitle>i{
+    color: #4CAF50;
+}
+
+/* -------------- light-green -------------- */
+body.folder-color-light-green:not(.dark) header{
+    background-color: #689F38;
+    color: black;
+}
+body.folder-color-light-green:not(.dark){
+    background-color: #DCEDC8;
+}
+body.folder-color-light-green .mdl-chip.chip-colored,
+body.folder-color-light-green .progressbar{
+    background-color: #8BC34A;
+    color: black;
+}
+body:not(.dark) .item.folder-color-light-green .mdl-card{
+    background-color: #C5E1A5;
+}
+body.dark:not(.black) .item.folder-color-light-green .filetitle,
+body.folder-color-light-green.dark:not(.black) header  {
+    background-color: #33691E;
+    color: white;
+}
+body.black .item.folder-color-light-green .mdl-card,
+body.folder-color-light-green.black header{
+    outline-color: #8BC34A;
+    border-color: #8BC34A;
+}
+body.black .item.folder-color-light-green .filetitle>i{
+    color: #8BC34A;
+}
+
+/* -------------- lime -------------- */
+body.folder-color-lime:not(.dark) header{
+    background-color: #AFB42B;
+    color: black;
+}
+body.folder-color-lime:not(.dark) main{
+    background-color: #F0F4C3;
+}
+body.folder-color-lime .mdl-chip.chip-colored,
+body.folder-color-lime .progressbar{
+    background-color: #CDDC39;
+    color: black;
+}
+body:not(.dark) .item.folder-color-lime .mdl-card{
+    background-color: #E6EE9C;
+}
+body.dark:not(.black) .item.folder-color-lime .filetitle,
+body.folder-color-lime.dark:not(.black) header  {
+    background-color: #827717;
+    color: black;
+}
+body.black .item.folder-color-lime .mdl-card,
+body.folder-color-lime.black header{
+    outline-color: #CDDC39;
+    border-color: #CDDC39;
+}
+body.black .item.folder-color-lime .filetitle>i{
+    color: #CDDC39;
+}
+
+/* -------------- yellow -------------- */
+body.folder-color-yellow:not(.dark) header{
+    background-color: #FBC02D;
+    color: black;
+}
+body.folder-color-yellow:not(.dark) main{
+    background-color: #FFF9C4;
+}
+body.folder-color-yellow .mdl-chip.chip-colored,
+body.folder-color-yellow .progressbar{
+    background-color: #FFEB3B;
+    color: black;
+}
+body:not(.dark) .item.folder-color-yellow .mdl-card{
+    background-color: #FFF59D;
+}
+body.dark:not(.black) .item.folder-color-yellow .filetitle,
+body.folder-color-yellow.dark:not(.black) header  {
+    background-color: #F57F17;
+    color: black;
+}
+body.black .item.folder-color-yellow .mdl-card,
+body.folder-color-yellow.black header{
+    outline-color: #FFEB3B;
+    border-color: #FFEB3B;
+}
+body.black .item.folder-color-yellow .filetitle>i{
+    color: #FFEB3B;
+}
+
+/* -------------- amber -------------- */
+body.folder-color-amber:not(.dark) header{
+    background-color: #FFA000;
+    color: black;
+}
+body.folder-color-amber:not(.dark) main{
+    background-color: #FFECB3;
+}
+body.folder-color-amber .mdl-chip.chip-colored,
+body.folder-color-amber .progressbar{
+    background-color: #FFC107;
+    color: black;
+}
+body:not(.dark) .item.folder-color-amber .mdl-card{
+    background-color: #FFE082;
+}
+body.dark:not(.black) .item.folder-color-amber .filetitle ,
+body.folder-color-amber.dark:not(.black) header {
+    background-color: #FF6F00;
+    color: black;
+}
+body.black .item.folder-color-amber .mdl-card,
+body.folder-color-amber.black header{
+    outline-color: #FFC107;
+    border-color: #FFC107;
+}
+body.black .item.folder-color-amber .filetitle>i{
+    color: #FFC107;
+}
+
+/* -------------- orange -------------- */
+body.folder-color-orange:not(.dark) header{
+    background-color: #F57C00;
+    color: black;
+}
+body.folder-color-orange:not(.dark) main{
+    background-color: #FFE0B2;
+}
+body.folder-color-orange .mdl-chip.chip-colored,
+body.folder-color-orange .progressbar{
+    background-color: #FF9800;
+    color: black;
+}
+body:not(.dark) .item.folder-color-orange .mdl-card{
+    background-color: #FFCC80;
+}
+body.dark:not(.black) .item.folder-color-orange .filetitle ,
+body.folder-color-orange.dark:not(.black) header {
+    background-color: #E65100;
+    color: black;
+}
+body.black .item.folder-color-orange .mdl-card,
+body.folder-color-orange.black header{
+    outline-color: #FF9800;
+    border-color: #FF9800;
+}
+body.black .item.folder-color-orange .filetitle>i{
+    color: #FF9800;
+}
+
+/* -------------- deep-orange -------------- */
+body.folder-color-deep-orange:not(.dark) header{
+    background-color: #E64A19;
+    color: black;
+}
+body.folder-color-deep-orange:not(.dark) main{
+    background-color: #FFCCBC;
+}
+body.folder-color-deep-orange .mdl-chip.chip-colored,
+body.folder-color-deep-orange .progressbar{
+    background-color: #FF5722;
+    color: black;
+}
+body:not(.dark) .item.folder-color-deep-orange .mdl-card{
+    background-color: #FFAB91;
+}
+body.dark:not(.black) .item.folder-color-deep-orange .filetitle,
+body.folder-color-deep-orange.dark:not(.black) header  {
+    background-color: #BF360C;
+    color: white;
+}
+body.black .item.folder-color-deep-orange .mdl-card,
+body.folder-color-deep-orange.black header{
+    outline-color: #FF5722;
+    border-color: #FF5722;
+}
+body.black .item.folder-color-deep-orange .filetitle>i{
+    color: #FF5722;
+}
+
+/* -------------- brown -------------- */
+body.folder-color-brown:not(.dark) header{
+    background-color: #5D4037;
+}
+body.folder-color-brown:not(.dark) main{
+    background-color: #D7CCC8;
+}
+body.folder-color-brown .mdl-chip.chip-colored,
+body.folder-color-brown .progressbar{
+    background-color: #795548;
+    color: white;
+}
+body:not(.dark) .item.folder-color-brown .mdl-card{
+    background-color: #BCAAA4;
+}
+body.dark:not(.black) .item.folder-color-brown .filetitle ,
+body.folder-color-brown.dark:not(.black) header {
+    background-color: #3E2723;
+    color: white;
+}
+body.black .item.folder-color-brown .mdl-card,
+body.folder-color-brown.black header{
+    outline-color: #795548;
+    border-color: #795548;
+}
+body.black .item.folder-color-brown .filetitle>i{
+    color: #795548;
+}
+
+/* -------------- grey -------------- */
+body.folder-color-grey:not(.dark) header{
+    background-color: #616161;
+}
+body.folder-color-grey:not(.dark) main{
+    background-color: #F5F5F5;
+}
+body.folder-color-grey .mdl-chip.chip-colored,
+body.folder-color-grey .progressbar{
+    background-color: #9E9E9E;
+    color: black;
+}
+body:not(.dark) .item.folder-color-grey .mdl-card{
+    background-color: #EEEEEE;
+}
+body.dark:not(.black) .item.folder-color-grey .filetitle,
+body.folder-color-grey.dark:not(.black) header  {
+    background-color: #212121;
+    color: white;
+}
+body.black .item.folder-color-grey .mdl-card,
+body.folder-color-grey.black header{
+    outline-color: #9E9E9E;
+    border-color: #9E9E9E;
+}
+body.black .item.folder-color-grey .filetitle>i{
+    color: #9E9E9E;
+}
+
+/* -------------- blue-grey -------------- */
+body.folder-color-blue-grey:not(.dark) header{
+    background-color: #455A64;
+}
+body.folder-color-blue-grey:not(.dark) main{
+    background-color: #CFD8DC;
+}
+body.folder-color-blue-grey .mdl-chip.chip-colored,
+body.folder-color-blue-grey .progressbar{
+    background-color: #607D8B;
+    color: black;
+}
+body:not(.dark) .item.folder-color-blue-grey .mdl-card{
+    background-color: #B0BEC5;
+}
+body.dark:not(.black) .item.folder-color-blue-grey .filetitle,
+body.folder-color-blue-grey.dark:not(.black) header {
+    background-color: #263238;
+    color: white;
+}
+body.black .item.folder-color-blue-grey .mdl-card,
+body.folder-color-blue-grey.black header{
+    outline-color: #607D8B;
+    border-color: #607D8B;
+}
+body.black .item.folder-color-blue-grey .filetitle>i{
+    color: #607D8B;
+}
+
+
+
+
+
+
+.mdl-layout__header .mdl-layout__drawer-button, .mdl-layout__header .pagebutton{
+    color: inherit;
+
+}

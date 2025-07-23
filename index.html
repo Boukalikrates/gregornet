@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Gregornet">
+    <meta name="theme-color" content="">
+    <!--    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
+    <link rel="stylesheet" media="screen" href="/gregornet/mdl/material.min.css">
+    <link rel="stylesheet" href="/gregornet/explor.css?21">
+    <link rel="stylesheet" href="/gregornet/colors.css?19">
+    <link rel="stylesheet" media="print" href="/gregornet/print.css">
+    <link rel="icon" sizes="192x192" href="/gregornet/gregornet2.svg">
+    <link rel="manifest" href="/gregornet/manifest.json?2" />
+    <script src="/gregornet/mdl/material.min.js"></script>
+    <script src="/gregornet/jquery-3.3.1.min.js"></script>
+    <!-- <script src="/gregornet/dialog-polyfill-master/dist/dialog-polyfill.js"></script> -->
+    <script src="/gregornet/explor.js?19"></script>
+    <script src="/gregornet/loading.js?21"></script>
+    <script src="/gregornet/audio.js?19"></script>
+    <title>Gregornet</title>
+</head>
+
+<body class="gregornet dark">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fix ed-header">
+        <header class="mdl-layout__header header  mdl-layout__header--scroll ">
+
+
+            <div class="mdl-layout__header-row header-row">
+                <button class="mdl-button mdl-js-button mdl-button--icon pagebutton back-button internallink">
+                    <i class="material-icons">arrow_back</i>
+                </button>
+
+                <span class="mdl-layout-title title header-title"></span>
+                <div class="mdl-layout-spacer"></div>
+                <button class="mdl-button mdl-js-button mdl-button--icon pagebutton show-upload" title="Upload">
+                    <i class="material-icons">publish</i>
+                </button>
+                <a class="mdl-button mdl-js-button mdl-button--icon pagebutton internallink" title="Settings"
+                    href="/gregornet">
+                    <i class="material-icons">settings</i>
+                </a>
+
+
+            </div>
+        </header>
+
+
+
+
+        <main class="mdl-layout__content">
+
+            <div class="page-content">
+                <!--fakeheader-->
+
+                <!--/fakeheader-->
+                <!--toolbar-->
+
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <a class="mdl-button mdl-js-button mdl-button--icon pagebutton m" href="..">
+                            <i class="material-icons">arrow_back</i>
+                        </a>
+                        <button id="modechanger-menu-button"
+                            class="mdl-button mdl-js-button mdl-button--icon pagebutton" title="View mode">
+                            <i class="material-icons">more_vert</i>
+                        </button>
+                        <button id="set-color" class="mdl-button mdl-js-button mdl-button--icon" title="Folder color">
+                            <i class="material-icons">palette</i>
+                        </button>
+                        <button id="new-folder" class="mdl-button mdl-js-button mdl-button--icon new-folder"
+                            title="New folder">
+                            <i class="material-icons">create_new_folder</i>
+                        </button>
+                        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect modechanger-menu"
+                            for="modechanger-menu-button">
+                            <li class="mdl-menu__item modechanger m-default" data-mode="default">Default view</li>
+                            <li class="mdl-menu__item modechanger m-list" data-mode="list">List view</li>
+                            <li class="mdl-menu__item modechanger m-stream" data-mode="stream">Stream</li>
+                        </ul>
+                        <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="sort-things1">
+                            <li data-sort='name' title="Name" class="mdl-menu__item sortoption">A-Z</li>
+                            <li data-sort='name' title="Name" class="mdl-menu__item sortoption">Z-A</li>
+                            <li data-sort='modified' title="Date" class="mdl-menu__item sortoption">Newest to Oldest</li>
+                            <li data-sort='modified' title="Date" class="mdl-menu__item sortoption">Oldest to Newest</li>
+                            <li data-sort='size' title="Size" class="mdl-menu__item sortoption">Smallest to Biggest</li>
+                            <li data-sort='size' title="Size" class="mdl-menu__item sortoption">Biggest to Smallest</li>
+                            <li data-sort='type' title="Type" class="mdl-menu__item sortoption">Type Ascending</li>
+                            <li data-sort='type' title="Type" class="mdl-menu__item sortoption">Type Descending</li>
+                            <li data-sort='random' title="Pseudorandom" class="mdl-menu__item sortoption">Pseudorandom</li>
+                        </ul>
+                        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="set-color">
+                            <li disabled class="mdl-menu__item">
+                                <button data-set-color="red" title="Red"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--red-700 set-color-button"></button>
+                                <button data-set-color="pink" title="Pink"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--pink-700 set-color-button"></button>
+                                <button data-set-color="purple" title="Purple"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--purple-700 set-color-button"></button>
+                                <button data-set-color="deep-purple" title="Deep purple"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--deep-purple-700 set-color-button"></button>
+                                <button data-set-color="indigo" title="Indigo" class=" mdl-button mdl-js-button mdl-button--icon mdl-color--indigo-700
+                                    set-color-button"></button>
+                            </li>
+                            <li disabled class="mdl-menu__item">
+                                <button data-set-color="blue" title="Blue"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--blue-700 set-color-button"></button>
+                                <button data-set-color="light-blue" title="Light blue"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--light-blue-700 set-color-button"></button>
+                                <button data-set-color="cyan" title="Cyan"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--cyan-700 set-color-button"></button>
+                                <button data-set-color="teal" title="Teal"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--teal-700 set-color-button"></button>
+                                <button data-set-color="green" title="Green"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--green-700 set-color-button"></button>
+                            </li>
+                            <li disabled class="mdl-menu__item">
+                                <button data-set-color="light-green" title=""
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--light-green-700 set-color-button"></button>
+                                <button data-set-color="lime" title="Light green"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--lime-700 set-color-button"></button>
+                                <button data-set-color="yellow" title="Yellow"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--yellow-700 set-color-button"></button>
+                                <button data-set-color="amber" title="Amber"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--amber-700 set-color-button"></button>
+                                <button data-set-color="orange" title="Orange"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--orange-700 set-color-button"></button>
+                            </li>
+                            <li disabled class="mdl-menu__item">
+                                <button data-set-color="deep-orange" title="Deep orange"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--deep-orange-700 set-color-button"></button>
+                                <button data-set-color="brown" title="Brown"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--brown-700 set-color-button"></button>
+                                <button data-set-color="grey" title="Grey"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--grey-700 set-color-button"></button>
+                                <button data-set-color="blue-grey" title="Blue grey"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-color--blue-grey-700 set-color-button"></button>
+                                <button data-set-color="none" title="Clear"
+                                    class="mdl-button mdl-js-button mdl-button--icon set-color-button">
+                                    <i class="material-icons">close</i>
+                                </button>
+
+                            </li>
+                        </ul>
+                        <!-- <div class="splitpages">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect splitpages"
+                                for="splitpages">
+                                <input type="checkbox" id="splitpages" class="mdl-checkbox__input" checked>
+                            </label>
+                        </div> -->
+
+                    </div>
+
+                    <div class="toolbar-center pagesbuttons">
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-first"
+                            title="First page">
+                            <i class="material-icons">first_page</i>
+                        </span>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-prev"
+                            title="Previous page">
+                            <i class="material-icons">chevron_left</i>
+                        </span>
+                        <button id="pagenumber" class="mdl-button mdl-js-button pagesbuttons pagenumber"
+                            title="Go to page">
+                            0
+                        </button>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-next"
+                            title="Next page">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-last"
+                            title="Last page">
+                            <i class="material-icons">last_page</i>
+                        </span>
+                    </div>
+                    <div class="toolbar-right">
+                        <button id="sort-things1" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">sort</i>
+                        </button>
+                        <button id="sort-normal" class="mdl-button mdl-js-button mdl-button--icon"
+                            title="Reverse order">
+                            <i class="material-icons">expand_more</i>
+                        </button>
+                        <!-- <button id="clear-filter" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">search</i>
+                        </button>
+                        <div class="mdl-textfield mdl-js-textfield ">
+                            <input class="mdl-textfield__input" type="text" id="filter">
+                            <label class="mdl-textfield__label" for="filter">Filter</label>
+                        </div> -->
+                    </div>
+                </div>
+
+                <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect chunk settings-tabs">
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#settings-local" class="mdl-tabs__tab settings-local" draggable="false">Local</a>
+                        <a href="#settings-general" class="mdl-tabs__tab settings-general" draggable="false">Server</a>
+                        <a href="#settings-about" class="mdl-tabs__tab settings-about is-active" draggable="false">About</a>
+                    </div>
+
+                    <div class="mdl-tabs__panel settings-local" id="settings-local">
+
+                        <div class="settings-section">
+                            <h5>Theme</h5>
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="theme-default-radio">
+                                        <input type="radio" id="theme-default-radio"
+                                            class="mdl-radio__button theme-radio" name="theme-radio" value="default">
+                                        <span class="mdl-radio__label">System default</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item-primary-content mdl-list__item">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="theme-light-radio">
+                                        <input type="radio" id="theme-light-radio" class="mdl-radio__button theme-radio"
+                                            name="theme-radio" value="light">
+                                        <span class="mdl-radio__label">Light</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item-primary-content mdl-list__item">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="theme-dark-radio">
+                                        <input type="radio" id="theme-dark-radio" class="mdl-radio__button theme-radio"
+                                            name="theme-radio" value="dark">
+                                        <span class="mdl-radio__label">Dark</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item-primary-content mdl-list__item">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="theme-black-radio">
+                                        <input type="radio" id="theme-black-radio" class="mdl-radio__button theme-radio"
+                                            name="theme-radio" value="black">
+                                        <span class="mdl-radio__label">Black</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="settings-section">
+                            <h5>Sticky header</h5>
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="stickyheader-default-radio">
+                                        <input type="radio" id="stickyheader-default-radio"
+                                            class="mdl-radio__button stickyheader-radio" name="stickyheader-radio"
+                                            value="default">
+                                        <span class="mdl-radio__label">Always</span>
+                                    </label>
+                                </li>
+
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="stickyheader-sometimes-radio">
+                                        <input type="radio" id="stickyheader-sometimes-radio"
+                                            class="mdl-radio__button stickyheader-radio" name="stickyheader-radio"
+                                            value="sometimes">
+                                        <span class="mdl-radio__label">In default and list modes</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="stickyheader-never-radio">
+                                        <input type="radio" id="stickyheader-never-radio"
+                                            class="mdl-radio__button stickyheader-radio" name="stickyheader-radio"
+                                            value="never">
+                                        <span class="mdl-radio__label">Never</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="settings-section">
+                            <h5>Play mode</h5>
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-default-radio">
+                                        <input type="radio" id="playmode-default-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
+                                            value="default">
+                                        <span class="mdl-radio__label">Default</span>
+                                    </label>
+                                </li>
+
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-loop-radio">
+                                        <input type="radio" id="playmode-loop-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio" value="loop">
+                                        <span class="mdl-radio__label">Loop</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-single-radio">
+                                        <input type="radio" id="playmode-single-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
+                                            value="single">
+                                        <span class="mdl-radio__label">Single track</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-loopsingle-radio">
+                                        <input type="radio" id="playmode-loopsingle-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
+                                            value="loopsingle">
+                                        <span class="mdl-radio__label">Loop single track</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="mdl-list hidden">
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Dark mode
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="dark-mode-switch">
+                                        <input type="checkbox" id="dark-mode-switch"
+                                            class="mdl-switch__input dark-mode-switch" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Autoplay
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="audio-autoplay">
+                                        <input type="checkbox" id="audio-autoplay"
+                                            class="mdl-switch__input audio-autoplay" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Loop
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="audio-loop">
+                                        <input type="checkbox" id="audio-loop" class="mdl-switch__input audio-loop"
+                                            checked />
+                                    </label>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="mdl-tabs__panel settings-general" id="settings-general">
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="config-serverName"
+                                        value="Gregornet">
+                                    <label class="mdl-textfield__label" for="config-serverName">serverName</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-serverName">
+                                        Display name that is shown in a header of root directory and in a browser
+                                        tab
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" id="config-maxThumbs" value="3">
+                                    <label class="mdl-textfield__label" for="config-maxThumbs">maxThumbs</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-maxThumbs">
+                                        Maximum number of thumbnails for a folder tile
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" id="config-pageSize" value="60">
+                                    <label class="mdl-textfield__label" for="config-pageSize">pageSize</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-pageSize">
+                                        Number of files per page
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" id="config-startIndex" value="1">
+                                    <label class="mdl-textfield__label" for="config-startIndex">startIndex</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-startIndex">
+                                        While many people start counting from number one, programmers count from
+                                        zero. This fields adjusts how pages are numbered.
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="config-randomPrefix" value="">
+                                    <label class="mdl-textfield__label" for="config-randomPrefix">randomPrefix</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-randomPrefix">
+                                        Seed for pseudorandom ordering. Type <kbd>&#123;0&#125;</kbd> to get a new
+                                        seed every day.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    hideLores
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-hideLores">
+                                        <input type="checkbox" id="config-hideLores"
+                                            class="mdl-switch__input config-hideLores" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    hideDotFiles
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-hideDotFiles">
+                                        <input type="checkbox" id="config-hideDotFiles"
+                                            class="mdl-switch__input config-hideDotFiles" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    showSymlinkIcons
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-showSymlinkIcons">
+                                        <input type="checkbox" id="config-showSymlinkIcons"
+                                            class="mdl-switch__input config-showSymlinkIcons" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    showParent
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-showParent">
+                                        <input type="checkbox" id="config-showParent"
+                                            class="mdl-switch__input config-showParent" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    readAudioTags
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-readAudioTags">
+                                        <input type="checkbox" id="config-readAudioTags"
+                                            class="mdl-switch__input config-readAudioTags" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    readAudioCovers
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-readAudioCovers">
+                                        <input type="checkbox" id="config-readAudioCovers"
+                                            class="mdl-switch__input config-readAudioCovers" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-forceHide"></textarea>
+                                    <label class="mdl-textfield__label" for="config-forceHide">forceHide</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-lores"></textarea>
+                                    <label class="mdl-textfield__label" for="config-lores">lores</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-images"></textarea>
+                                    <label class="mdl-textfield__label" for="config-images">images</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-video"></textarea>
+                                    <label class="mdl-textfield__label" for="config-video">video</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-audio"></textarea>
+                                    <label class="mdl-textfield__label" for="config-audio">audio</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-html"></textarea>
+                                    <label class="mdl-textfield__label" for="config-html">html</label>
+
+                                </div>
+                            </li>
+                        </ul>
+
+                        <button type="button" class="mdl-button  mdl-button--raised mdl-button--colored settings-save">Save</button>
+                    </div>
+                    <div class="mdl-tabs__panel settings-about is-active" id="settings-about">
+                        <div class="mdl-list mdl-grid">
+
+                            <div class="mdl-cell mdl-cell--12-col pathtree"></div>
+
+                            <div class="mdl-cell mdl-cell--12-col pagesbuttons pagechips"></div>
+
+                            <div class="mdl-cell mdl-cell--12-col loadspinner">
+                                <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                            </div>
+                            <!-- <h2 class=" mdl-cell mdl-cell--12-col m m-stream title"></h2> -->
+
+
+                            <div class="mdl-cell mdl-cell--12-col afterbase emptyfolder">
+                                <!-- <button class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored">Load
+                                more</button> -->
+                                <div class="">This folder is empty.</div>
+                            </div>
+
+                            <div class="mdl-cell mdl-cell--12-col afterbase error-5xx">
+                                <div class="">Server encountered an internal error. Check logs for more information.
+                                </div>
+                                <button
+                                    class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored page-reload-btn">Reload</button>
+                            </div>
+                            <div class="mdl-cell mdl-cell--12-col afterbase error-disconnected">
+                                <div class="">Could not connect to server. Check your LAN settings and try again. </div>
+                                <button
+                                    class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored page-reload-btn">Reload</button>
+                            </div>
+                            <!-- <div class="mdl-cell mdl-cell--12-col page-end">
+                            <img src='/gregornet/icon.svg' alt='End'>
+                        </div> -->
+                            <div class="mdl-cell mdl-cell--12-col pagesbuttons pagechips"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="toolbar">
+                    <div class="toolbar-center ">
+                        <span
+                            class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-first pagesbuttons"
+                            title="First page">
+                            <i class="material-icons">first_page</i>
+                        </span>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-prev pagesbuttons"
+                            title="Previous page">
+                            <i class="material-icons">chevron_left</i>
+                        </span>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton scroll-top">
+                            <i class="material-icons">expand_less</i>
+                        </span>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-next pagesbuttons"
+                            title="Next page">
+                            <i class="material-icons">chevron_right</i>
+                        </span>
+                        <span class="mdl-button mdl-js-button mdl-button--icon pagebutton change-page-last pagesbuttons"
+                            title="Last page">
+                            <i class="material-icons">last_page</i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <footer class="mdl-mini-footer m">
+                <div class="mdl-mini-footer__left-section">
+                    <ul class="mdl-mini-footer__link-list">
+                        <li><a class="internallink" href="/gregornet">Gregornet</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </main>
+        <div id="mediaplayer" class="mediaplayer reduced mdl-shadow--3dp hidden">
+            <video data-np="" data-np-index="-1"></video>
+            <div id="audioprogress" class="mdl-progress mdl-js-progress"></div>
+            <input id="audioslider" class="mdl-slider mdl-js-slider" type="range" min="0" max="100" step="0.01">
+            <div class="toolbar">
+                <div class="toolbar-left">
+                    <button id="audio-hide-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Hide player">
+                        <i class="material-icons">expand_more</i>
+                    </button>
+                    <button id="audio-previous-btn" class="mdl-button mdl-js-button mdl-button--icon"
+                        title="Previous track">
+                        <i class="material-icons">skip_previous</i>
+                    </button>
+                    <button id="audio-play-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Play">
+                        <i class="material-icons">play_arrow</i>
+                    </button>
+                    <button id="audio-stop-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Stop">
+                        <i class="material-icons">stop</i>
+                    </button>
+                    <button id="audio-next-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Next track">
+                        <i class="material-icons">skip_next</i>
+                    </button>
+                </div>
+                <div class="toolbar-center">
+                    <output id="audio-title">Not playing</output>
+
+                </div>
+                <div class="toolbar-right">
+                    <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+                    for="audio-autoplay">
+                    <input type="checkbox" id="audio-autoplay" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Autoplay</span>
+                </label> -->
+                    <output id="audio-output">--:--</output>
+                    <button id="audio-fullscreen" class="mdl-button mdl-js-button mdl-button--icon hidden">
+                        <i class="material-icons">fullscreen</i>
+                    </button>
+                </div>
+            </div>
+            <button id="audio-show-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab ">
+                <i class="material-icons">expand_less</i>
+            </button>
+        </div>
+    </div>
+
+
+    <div class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+    </div>
+
+
+    <dialog class="mdl-dialog upload-dialog">
+        <form enctype="multipart/form-data" action="/gregornet/upload.py" method="post" id="file-upload-form">
+            <h4 class="mdl-dialog__title">Upload</h4>
+            <div class="mdl-dialog__content">
+                <label>File: <input type="file" name="filename" id="file-upload-name" multiple></label<div
+                        class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <!-- <div class="mdl-tabs__tab-bar">
+                        <a href="#settings-local" class="mdl-tabs__tab is-active" draggable="false">Local</a>
+                        <a href="#settings-general" class="mdl-tabs__tab" draggable="false">Server</a>
+                        <a href="#settings-about" class="mdl-tabs__tab" draggable="false">About</a>
+                    </div> -->
+                    <input type="hidden" name="path" value="" id="file-upload-path">
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="submit" class="mdl-button  mdl-button--raised mdl-button--colored">Upload</button>
+                <button type="button" class="mdl-button close">Cancel</button>
+            </div>
+
+        </form>
+        <form action="/gregornet/operation.py" method="post" id="file-modify-form" class="hidden">
+            <input type="hidden" name="action" value="" id="file-modify-action">
+            <input type="hidden" name="returnpath" value="" id="file-modify-return-path">
+            <input type="hidden" name="path" value="" id="file-modify-path">
+            <input type="hidden" name="newpath" value="" id="file-modify-new-path">
+            <input type="hidden" name="name" value="" id="file-modify-name">
+            <input type="hidden" name="val" value="" id="file-modify-val">
+        </form>
+    </dialog>
+    <dialog class="mdl-dialog settings-dialog">
+        <form action="" method="post">
+            <h4 class="mdl-dialog__title">Settings</h4>
+            <div class="mdl-dialog__content">
+
+                <!-- <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                    <div class="mdl-tabs__tab-bar">
+                        <a href="#settings-local" class="mdl-tabs__tab is-active" draggable="false">Local</a>
+                        <a href="#settings-general" class="mdl-tabs__tab" draggable="false">Server</a>
+                        <a href="#settings-about" class="mdl-tabs__tab" draggable="false">About</a>
+                    </div>
+
+                    <div class="mdl-tabs__panel is-active settings-local" id="settings-local">
+
+                        <div class="">
+                            <h5>Theme</h5>
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="theme-default-radio">
+                                        <input type="radio" id="theme-default-radio"
+                                            class="mdl-radio__button theme-radio" name="theme-radio" value="default">
+                                        <span class="mdl-radio__label">System default</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item-primary-content mdl-list__item">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="theme-light-radio">
+                                        <input type="radio" id="theme-light-radio" class="mdl-radio__button theme-radio"
+                                            name="theme-radio" value="light">
+                                        <span class="mdl-radio__label">Light</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item-primary-content mdl-list__item">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="theme-dark-radio">
+                                        <input type="radio" id="theme-dark-radio" class="mdl-radio__button theme-radio"
+                                            name="theme-radio" value="dark">
+                                        <span class="mdl-radio__label">Dark</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item-primary-content mdl-list__item">
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="theme-black-radio">
+                                        <input type="radio" id="theme-black-radio" class="mdl-radio__button theme-radio"
+                                            name="theme-radio" value="black">
+                                        <span class="mdl-radio__label">Black</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="">
+                            <h5>Sticky header</h5>
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="stickyheader-default-radio">
+                                        <input type="radio" id="stickyheader-default-radio"
+                                            class="mdl-radio__button stickyheader-radio" name="stickyheader-radio"
+                                            value="default">
+                                        <span class="mdl-radio__label">Always</span>
+                                    </label>
+                                </li>
+
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="stickyheader-sometimes-radio">
+                                        <input type="radio" id="stickyheader-sometimes-radio"
+                                            class="mdl-radio__button stickyheader-radio" name="stickyheader-radio"
+                                            value="sometimes">
+                                        <span class="mdl-radio__label">In default and list modes</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="stickyheader-never-radio">
+                                        <input type="radio" id="stickyheader-never-radio"
+                                            class="mdl-radio__button stickyheader-radio" name="stickyheader-radio"
+                                            value="never">
+                                        <span class="mdl-radio__label">Never</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="">
+                            <h5>Play mode</h5>
+                            <ul class="mdl-list">
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-default-radio">
+                                        <input type="radio" id="playmode-default-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
+                                            value="default">
+                                        <span class="mdl-radio__label">Default</span>
+                                    </label>
+                                </li>
+
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-loop-radio">
+                                        <input type="radio" id="playmode-loop-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio" value="loop">
+                                        <span class="mdl-radio__label">Loop</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-single-radio">
+                                        <input type="radio" id="playmode-single-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
+                                            value="single">
+                                        <span class="mdl-radio__label">Single track</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-loopsingle-radio">
+                                        <input type="radio" id="playmode-loopsingle-radio"
+                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
+                                            value="loopsingle">
+                                        <span class="mdl-radio__label">Loop single track</span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                        <ul class="mdl-list hidden">
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Dark mode
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="dark-mode-switch">
+                                        <input type="checkbox" id="dark-mode-switch"
+                                            class="mdl-switch__input dark-mode-switch" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Autoplay
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="audio-autoplay">
+                                        <input type="checkbox" id="audio-autoplay"
+                                            class="mdl-switch__input audio-autoplay" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    Loop
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="audio-loop">
+                                        <input type="checkbox" id="audio-loop" class="mdl-switch__input audio-loop"
+                                            checked />
+                                    </label>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="mdl-tabs__panel settings-general" id="settings-general">
+                        <ul class="mdl-list">
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="config-serverName"
+                                        value="Gregornet">
+                                    <label class="mdl-textfield__label" for="config-serverName">serverName</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-serverName">
+                                        Display name that is shown in a header of root directory and in a browser
+                                        tab
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" id="config-maxThumbs" value="3">
+                                    <label class="mdl-textfield__label" for="config-maxThumbs">maxThumbs</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-maxThumbs">
+                                        Maximum number of thumbnails for a folder tile
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" id="config-pageSize" value="60">
+                                    <label class="mdl-textfield__label" for="config-pageSize">pageSize</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-pageSize">
+                                        Number of files per page
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" id="config-startIndex" value="1">
+                                    <label class="mdl-textfield__label" for="config-startIndex">startIndex</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-startIndex">
+                                        While many people start counting from number one, programmers count from
+                                        zero. This fields adjusts how pages are numbered.
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text" id="config-randomPrefix" value="">
+                                    <label class="mdl-textfield__label" for="config-randomPrefix">randomPrefix</label>
+                                    <div class="mdl-tooltip mdl-tooltip--large" for="config-randomPrefix">
+                                        Seed for pseudorandom ordering. Type <kbd>&#123;0&#125;</kbd> to get a new
+                                        seed every day.
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    hideLores
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-hideLores">
+                                        <input type="checkbox" id="config-hideLores"
+                                            class="mdl-switch__input config-hideLores" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    hideDotFiles
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-hideDotFiles">
+                                        <input type="checkbox" id="config-hideDotFiles"
+                                            class="mdl-switch__input config-hideDotFiles" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    showSymlinkIcons
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-showSymlinkIcons">
+                                        <input type="checkbox" id="config-showSymlinkIcons"
+                                            class="mdl-switch__input config-showSymlinkIcons" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    showParent
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-showParent">
+                                        <input type="checkbox" id="config-showParent"
+                                            class="mdl-switch__input config-showParent" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    readAudioTags
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-readAudioTags">
+                                        <input type="checkbox" id="config-readAudioTags"
+                                            class="mdl-switch__input config-readAudioTags" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    readAudioCovers
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    <label class="mdl-switch mdl-js-switch " for="config-readAudioCovers">
+                                        <input type="checkbox" id="config-readAudioCovers"
+                                            class="mdl-switch__input config-readAudioCovers" checked />
+                                    </label>
+                                </span>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-forceHide"></textarea>
+                                    <label class="mdl-textfield__label" for="config-forceHide">forceHide</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-lores"></textarea>
+                                    <label class="mdl-textfield__label" for="config-lores">lores</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-images"></textarea>
+                                    <label class="mdl-textfield__label" for="config-images">images</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-video"></textarea>
+                                    <label class="mdl-textfield__label" for="config-video">video</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-audio"></textarea>
+                                    <label class="mdl-textfield__label" for="config-audio">audio</label>
+
+                                </div>
+                            </li>
+                            <li class="mdl-list__item">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <textarea class="mdl-textfield__input" type="text" id="config-html"></textarea>
+                                    <label class="mdl-textfield__label" for="config-html">html</label>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mdl-tabs__panel settings-about" id="settings-about">
+                        <h5>Gregornet</h5>
+                        Copyright 2018-2023 Grzegorz Wusiewicz / University of Zielona Góra
+                        <h6>Open source licenses</h6>
+                        This program uses following software with given licenses:
+                        <ul>
+                            <li><a href="/gregornet/mdl/">Material Design Lite and Material Fonts, Apache License
+                                    2.0</a></li>
+                            <!-- <li><a href="/gregornet/dialog-polyfill-master/">Dialog Polyfill, BSD 3-Clause License</a></li> ->
+                        </ul>
+                    </div>
+                </div> -->
+
+            </div>
+            <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button  mdl-button--raised mdl-button--colored close">Close</button>
+                <!-- <button type="button" class="mdl-button close">Cancel</button> -->
+            </div>
+
+        </form>
+    </dialog>
+    <!-- McXxkAsGro5abQVyayKX // these were mo very old passwords
+    cG6o5eSN7zoeRPY6XVkZ -->
+
+    <!-- <div class="mdl-layout__drawer">
+        <span class="mdl-layout__title title"></span>
+
+        <div class="mdl-navigation">
+
+            <div class="mdl-navigation__link">
+            </div>
+            <div class="mdl-navigation__link">
+
+            </div>
+            <div class="mdl-navigation__link">
+            </div>
+            <div class="mdl-navigation__link">
+            </div>
+            <div class="mdl-navigation__link">
+            </div>
+        </div>
+
+
+    </div> -->
+</body>
+
+
+</html>

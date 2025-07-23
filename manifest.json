@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "Gregornet",
+  "short_name": "Gregornet",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "description": "LAN server disk browser.",
+  "icons": [{
+    "src": "gregornet/gregornet.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  },{
+    "src": "gregornet/gregornet2.svg",
+    "sizes": "192x192",
+    "type": "image/svg"
+  }]
+}
