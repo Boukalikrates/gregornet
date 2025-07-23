@@ -4,7 +4,7 @@
 
 import os
 import json
-from datetime import date
+from datetime import datetime
 from random import shuffle
 
 from common import convert_bytes,  md5hd, loadconfig, loadpathConfig, ext
@@ -28,7 +28,15 @@ def listdir(path):
           try:
             if not(i in config['forceHide'] or (i[0] == '.' and config['hideDotFiles'] and i!='..')):
                 pathConfig = loadpathConfig(path+i)
-                random = md5hd(i +config['randomPrefix'].format(str(date.today())))
+                random = md5hd(i + config['randomPrefix'].format(
+                    str(datetime.today())[0:10],
+                    y=str(datetime.today())[0:4],
+                    mo=str(datetime.today())[0:7],
+                    d=str(datetime.today())[0:10],
+                    h=str(datetime.today())[0:13],
+                    m=str(datetime.today())[0:16],
+                    s=str(datetime.today())[0:19],
+                    ))
                 isdir=os.path.isdir(i)
                 color = pathConfig['color'] if 'color' in pathConfig else ''
                 try:
