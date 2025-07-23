@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # coding=utf-8
+
+raise Exception(__file__+' is deprecated, do not launch this!!1')
 import os
 from random import shuffle
-
-from common import loadconfig, web, ext, md5hd, convert_bytes
+from urllib.parse import unquote
+from common import loadconfig,loadpathConfig, web, ext, md5hd, convert_bytes
 
 # import mutagen
 
@@ -13,9 +15,9 @@ import cgitb
 
 
 def filecard(i, root, path):
-    config = loadconfig(root)
+    config = loadconfig()
     result = ''
-    # if i in config['forcehide']:
+    # if i in config['forceHide']:
     #     return ''
     # if config['hideLores'] and i in config['lores']:
     #     return ''
@@ -25,12 +27,12 @@ def filecard(i, root, path):
     # --- DIRS ---
     linkicon = ' <i class="material-icons" title="Link">call_made</i>' if config['showSymlinkIcons'] and os.path.islink(i) else ''
     if os.path.isdir(i):
-        localconfig = loadconfig(root+path+i, True)
+        pathConfig = loadpathConfig(path+i)
         try:
             count = len(os.listdir(i))
             countdiv = '<a draggable="false" href="{link}" class="mdl-card__supporting-text mdl-card--expand">{c} element{s}</a>'.format(
                 link=web(i), c=count, s='' if count == 1 else 's')
-            if 'thumb' not in localconfig or localconfig['thumb']:
+            if 'thumb' not in pathConfig or pathConfig['thumb']:
                 thumb = '<a href="{link}"  class="dirthumbs mdl-card__media">'.format(
                     link=web(i))
                 jcount = 0
@@ -40,10 +42,10 @@ def filecard(i, root, path):
                 for j in jlist:
                     lext = ext(j).lower()
                     if lext in config['images']:
-                        thumbstyle = '<div class="dirthumb" data-thumb="url(\'/papermache/thumbnail.py?file={0}\') no-repeat top / cover"></div>'
+                        thumbstyle = '<div class="dirthumb" data-thumb="url(\'/gregornet/thumbnail.py?file={0}\') no-repeat top / cover"></div>'
                         thumb += thumbstyle.format(web(path+i+'/'+j))
                         jcount += 1
-                        if jcount >= config['maxthumbs']:
+                        if jcount >= config['maxThumbs']:
                             break
 
                 if jcount == 0:
@@ -57,13 +59,13 @@ def filecard(i, root, path):
             countdiv = '<div class="mdl-card__supporting-text ">Error listing folder: {}</div>'.format(
                 str(e))
         color=''
-        if 'color' in localconfig:
-            color = 'mdl-color--{}-200'.format(localconfig['color'])
+        if 'color' in pathConfig:
+            color = 'colored mdl-color--{}-200'.format(pathConfig['color'])
 
         card = '''
         <div draggable="false" data-link="{path}{link}" data-drop="true" id="{id}" class="mdl-card mdl-shadow--2dp {color} m m-default m-stream card-dir">
-            <a draggable="false" href="{link}" class="mdl-card__title">
-
+            <a draggable="false" href="{link}" class="mdl-card__title filetitle">
+                <i class="material-icons" title="Folder">folder</i>
                 {name}
                 {linkicon}
             </a>
@@ -79,7 +81,7 @@ def filecard(i, root, path):
             link=web(i),
             id=md5hd(i),
             path=web(path),
-            name=i,
+            name=i.replace('<','&lt;'),
             color=color,
             linkicon=linkicon,
             t=thumb,
@@ -100,7 +102,7 @@ def filecard(i, root, path):
                 pass
             streamholder = '''
             <figure class="m m-stream stream-holder">
-                <img src="/papermache/baseline_photo_white_18dp.png" id="{1}" class="stream-image stream-image-unloaded" loading="lazy" alt="{0}">
+                <img src="/gregornet/baseline_photo_white_18dp.png" id="{1}" class="stream-image stream-image-unloaded" loading="lazy" alt="{0}">
                 <a href="{0}" class="stream-caption">{2} | <output id="size-{1}"></output></a>
                 <figcaption>{lore}</figcaption>
             </figure>
@@ -116,11 +118,11 @@ def filecard(i, root, path):
 #                </div>
 #                '''.format(html(flore))
 
-        elif lext in config['videos']:
-            streamholder = '<div class="m m-stream stream-holder"><video src="{0}" class="stream-image" controls loop muted autoplay></video></div>'
+        # elif lext in config['video']:
+        #     streamholder = '<div class="m m-stream stream-holder"><video src="{0}" class="stream-image" controls loop muted autoplay></video></div>'
 
-        elif lext in config['audio']:
-            streamholder = '<div class="m m-stream stream-holder"><audio src="{0}" class="stream-image" controls  preload="none"  ></audio></div>'
+        # elif lext in config['audio']:
+        #     streamholder = '<div class="m m-stream stream-holder"><audio src="{0}" class="stream-image" controls  preload="none"  ></audio></div>'
         else:
             streamholder = ''
         card += streamholder.format(web(i), md5hd(i), i, lore=lore)
@@ -131,12 +133,13 @@ def filecard(i, root, path):
         lore = ''
         actions = ''
         if lext in config['images']:
-            thumb = 'data-thumb="url(\'{0}\') top / cover"'.format('/papermache/thumbnail.py?file='+web(path+i))
+            thumb = 'data-thumb="url(\'{0}\') top / cover"'.format('/gregornet/thumbnail.py?file='+web(path+i))
             lore = '''
             <a href="{0}" class="mdl-card__supporting-text mdl-card--expand">
             </a>
             '''.format(web(i))
             calss = 'card-image '
+
 
         elif lext in config['html']:
             lore = '''
@@ -146,14 +149,12 @@ def filecard(i, root, path):
             '''.format(web(i))
             calss = 'card-html '
 
-        elif lext in config['audio']:
-            thumb = 'data-np="{0}"'.format(md5hd(i))
-            # tracktitle=str(mutagen)
+        elif lext in config['video']:
+            thumb = 'data-np="{0}" data-thumb="url(\'{1}\') top / cover"'.format(md5hd(i),'/gregornet/thumbnail.py?file='+web(path+i))
             lore = '''
-            <div class="mdl-card__supporting-text mdl-card--expand">
-                {0}
-            </div>
-            '''.format('')
+            <a href="{0}" class="mdl-card__supporting-text mdl-card--expand">
+            </a>
+            '''.format(web(i))
             actions = '''
             <button class="mdl-button mdl-button--icon mdl-js-button play-button" data-np="{1}" data-href="{0}">
                 <i class="material-icons">play_arrow</i>
@@ -162,7 +163,27 @@ def filecard(i, root, path):
                 <i class="material-icons">get_app</i>
             </a>
             '''.format(web(i), md5hd(i))
-            calss = 'card-audio '
+            calss = 'm-stream card-video card-audio '
+
+
+
+        elif lext in config['audio']:
+            thumb = 'data-np="{0}"'.format(md5hd(i))
+            # tracktitle=str(mutagen)
+            lore = '''
+            <div class="mdl-card__supporting-text mdl-card--expand">
+                {0}
+            </div>
+            '''.format(fsize)
+            actions = '''
+            <button class="mdl-button mdl-button--icon mdl-js-button play-button" data-np="{1}" data-href="{0}">
+                <i class="material-icons">play_arrow</i>
+            </button>
+            <a class="mdl-button mdl-button--icon mdl-js-button" href="{0}" download>
+                <i class="material-icons">get_app</i>
+            </a>
+            '''.format(web(i), md5hd(i))
+            calss = 'm-stream card-audio '
 
         else:
             lore = '''
@@ -195,7 +216,7 @@ def filecard(i, root, path):
         </div>
         '''.format(
             link=web(i),
-            name=i,
+            name=i.replace('<','&lt;'),
             id=md5hd(i),
             t=thumb,
             path=web(path),
@@ -240,7 +261,7 @@ def filecard(i, root, path):
     '''
     result += item.format(
         link=web(i),
-        name=i,
+        name=i.replace('<','&lt;'),
         icon=icon,
         card=card
     )
@@ -256,7 +277,7 @@ if __name__ == '__main__':
     form = cgi.FieldStorage()
 
     root = os.environ['DOCUMENT_ROOT']
-    path = form.getvalue('path')
-    i = form.getvalue('i')
+    path = unquote(form.getvalue('path'))
+    i = unquote(form.getvalue('i'))
     os.chdir(root+path)
     print(filecard(i, root, path))
