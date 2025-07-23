@@ -254,16 +254,8 @@ function init() {
         });
     });
 
-    let uploadDialog = $('.upload-dialog')[0];
-    if (!uploadDialog.showModal) {
-        dialogPolyfill.registerDialog(uploadDialog);
-    }
-    let settingsDialog = $('.settings-dialog')[0];
-    if (!settingsDialog.showModal) {
-        dialogPolyfill.registerDialog(settingsDialog);
-    }
+   
     $('.show-upload').click(function () {
-        // uploadDialog.showModal();
         $('#file-upload-name').click();
     })
 
@@ -271,22 +263,7 @@ function init() {
         $("#file-upload-form").submit();
        
     });
-    $('.show-settings').click(function () {
-        // deprecated, now handling with /gregornet subpage
 
-        // $('.settings-general').html(renderJSONObject(config,'').children().last())
-        // componentHandler.upgradeDom();
-        // settingsDialog.showModal();
-
-        // not so fast, some tweaks are still needed
-        // fillSettingsPage();
-        // $('.settings-general input,.settings-general textarea').on('change', applySettingsPage);
-        // okay, these need to be where settings is loaded, that is in loadFolder
-    })
-    $('dialog').find('.close').click(function () {
-        uploadDialog.close();
-        settingsDialog.close();
-    });
     $('*[id][draggable=true]').each(function () {
         this.ondragstart = function (e) {
             //            e.dataTransfer.setData("datalink", e.target.dataset.link);

@@ -894,9 +894,6 @@ li:hover .listaction {
     outline: solid 10000px rgba(0,0,0,0.2);
 }
 
-.settings-dialog {
-    width: 360px;
-}
 
 
 
@@ -942,10 +939,6 @@ li:hover .listaction {
 
 
 @media screen and (min-width: 800px) {
-    .settings-dialog {
-        width: 720px;
-    }
-
     .settings-general>ul {
         columns: 2;
 
@@ -953,9 +946,6 @@ li:hover .listaction {
 }
 
 @media screen and (min-width: 1160px) {
-    .settings-dialog {
-        width: 1080px;
-    }
 
     .settings-general>ul {
         columns: 3;
