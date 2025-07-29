@@ -535,6 +535,8 @@ button.pagenumber {
 .card-image:hover .cardactions,
 .card-video:hover .filetitle,
 .card-video:hover .cardactions,
+.card-image .filetitle.renaming,
+.card-video .filetitle.renaming,
 .touchstart .card-image .cardactions,
 .touchstart .card-video .cardactions {
     opacity: 1;

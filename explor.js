@@ -251,14 +251,14 @@ function init() {
         });
     });
 
-   
+
     $('.show-upload').click(function () {
         $('#file-upload-name').click();
     })
 
-    $('#file-upload-name').on('change',function(e){
+    $('#file-upload-name').on('change', function (e) {
         $("#file-upload-form").submit();
-       
+
     });
 
     $('*[id][draggable=true]').each(function () {
@@ -319,7 +319,7 @@ function loadFolder() {
         if (!$('body').hasClass('settings-page')) {
             $('.settings-tabs>.mdl-tabs__panel, .settings-tabs>.mdl-tabs__tab-bar>.mdl-tabs__tab').removeClass('is-active');
             $('.settings-tabs .settings-local').addClass('is-active');
-        }else{
+        } else {
         }
 
 
@@ -473,14 +473,18 @@ function drop(e) {
         $('#file-upload-form').trigger('submit');
     }
     if (e.dataTransfer.getData("gregornet")) {
+        let oldpath = e.dataTransfer.getData("path").toString();
+        let newpath = targetPath + e.dataTransfer.getData("name").toString();
+        
+        if (oldpath == newpath) return;
+            preventScroll = $('html').scrollTop();
 
-        preventScroll = $('html').scrollTop();
-
-        $('#file-modify-action').val('move')
-        $('#file-modify-path').val(e.dataTransfer.getData("path"))
-        $('#file-modify-new-path').val(targetPath + e.dataTransfer.getData("name"))
-        $('#file-modify-return-path').val(location.pathname)
-        $('#file-modify-form').trigger('submit');
+            $('#file-modify-action').val('move');
+            $('#file-modify-path').val(oldpath);
+            $('#file-modify-new-path').val(newpath);
+            $('#file-modify-return-path').val(location.pathname);
+            $('#file-modify-form').trigger('submit');
+        
     }
     // console.log(e.dataTransfer);
     console.log(e);
@@ -718,7 +722,7 @@ function togglePlayMode() {
     }
 }
 
-function sort(mode,reverse) {
+function sort(mode, reverse) {
     if (mode) {
         pathStorage('sort', mode);
     } else if (pathStorage('sort')) {
@@ -726,12 +730,12 @@ function sort(mode,reverse) {
     } else {
         mode = pathStorage('sort', 'name');
     }
-    if (reverse){
-        pathStorage('reverse',reverse) ;
-    }else if(pathStorage('reverse')){ 
+    if (reverse) {
+        pathStorage('reverse', reverse);
+    } else if (pathStorage('reverse')) {
         reverse = pathStorage('reverse');
-    }else{
-        reverse = pathStorage('reverse')='no';
+    } else {
+        reverse = pathStorage('reverse') = 'no';
     }
 
     if (pathStorage('reverse') == 'yes') {

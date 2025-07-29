@@ -4,7 +4,7 @@ function loadPage(n) {
     let filteredListdir = listdirFilter(listdir);
     let start = 0;
     let end = filteredListdir.length;
-    let pageSize=config.pageSize>0?config.pageSize:Infinity;
+    let pageSize = config.pageSize > 0 ? config.pageSize : Infinity;
     let pagescount = Math.ceil(filteredListdir.length / pageSize);
     // if (pathStorage('splitpages') == 'yes' && pagescount > 1) {
     if (pagescount > 1) {
@@ -187,7 +187,7 @@ function filecard(file) {
 
     let card = $('<div draggable="true">');
 
-    let cardTitleText=$('<div class="filetitletext">').text(file.name)
+    let cardTitleText = $('<div class="filetitletext">').text(file.name)
     let cardTitle = $('<a class="mdl-card__title filetitle" draggable="false">').attr('href', link).append(cardTitleText);
     if (config.showSymlinkIcons && file.islink)
         cardTitle.append('<i class="material-icons" title="Link">call_made</i>');
@@ -224,10 +224,10 @@ function filecard(file) {
 
     } else {
         let lore = $('<div class="mdl-card__supporting-text  mdl-card--expand">');
-        if(file.tags){
-            if(file.tags.artist) $('<div class="supporting-text-bold">').text(file.tags.artist).appendTo(lore)
-            if(file.tags.title) $('<div class="supporting-text-bolder">').text(file.tags.title).appendTo(lore)
-            if(file.tags.album) $('<div>').text(file.tags.album).appendTo(lore)
+        if (file.tags) {
+            if (file.tags.artist) $('<div class="supporting-text-bold">').text(file.tags.artist).appendTo(lore)
+            if (file.tags.title) $('<div class="supporting-text-bolder">').text(file.tags.title).appendTo(lore)
+            if (file.tags.album) $('<div>').text(file.tags.album).appendTo(lore)
         }
         $('<div>').text(file.naturalsize).appendTo(lore);
         let actions = [];
@@ -268,7 +268,7 @@ function filecard(file) {
             actions.push($('<a class="mdl-button mdl-button--icon mdl-js-button download-button" title="Download" download>').attr('href', link).append('<i class="material-icons">get_app</i>'))
 
             // gaytag
-            actions.push($('<a class="mdl-button mdl-button--icon mdl-js-button download-button" title="Edit tags" target="_blank" >').attr('href', '/Pisane/gaytag/tageditor.html?'+path+link).append('<i class="material-icons">code</i>'))
+            actions.push($('<a class="mdl-button mdl-button--icon mdl-js-button download-button" title="Edit tags" target="_blank" >').attr('href', '/Pisane/gaytag/tageditor.html?' + path + link).append('<i class="material-icons">code</i>'))
 
             card.addClass('card-audio m-stream')
         }
@@ -369,23 +369,31 @@ function preparecard(item) {
     })
     item.find('.filerenamer').each(function () {
         $(this).click(function () {
-            let filetitle=$(this).parents().filter('.mdl-cell').find('.filetitle');
-            filetitle.css('pointer-events', 'none')
-            filetitle.click(function(e){
-                return 21==37;
-            })
-            let filetitletext= filetitle.find('.filetitletext')
-            filetitletext.attr('data-oldname',filetitletext.text()).prop('contenteditable',true).focus().on('blur',function(){
-                finishRenaming($(this));
-                
-            }).on('keydown',function(e){
-                if(e.key=='Escape'){
-                    finishRenaming($(this),true);
-                }else if(e.key=='Enter'){
-                    $(this).blur();
-                    finishRenaming($(this),false);
-                }
-            })
+            let oldfiletitle = $(this).parents().filter('.mdl-cell').find('.filetitle');
+            let filetitle = $('<div class="mdl-card__title filetitle renaming">').append(oldfiletitle.contents())
+            //.addClass('renaming');
+            oldfiletitle.replaceWith(filetitle);
+
+            filetitle.parent().prop('draggable',false);
+            // filetitle.css('pointer-events', 'none')
+            // filetitle.css('color', 'red')
+            // filetitle.click(function(e){
+            //     e.preventDefault();
+            //     return 21==37;
+            // })
+            let filetitletext = filetitle.find('.filetitletext');
+            filetitletext.attr('data-oldname', filetitletext.text()).prop('contenteditable', true).focus()
+                .on('blur', function () {
+                    finishRenaming($(this));
+
+                }).on('keydown', function (e) {
+                    if (e.key == 'Escape') {
+                        finishRenaming($(this), true);
+                    } else if (e.key == 'Enter') {
+                        $(this).blur();
+                        finishRenaming($(this), false);
+                    }
+                })
 
             //https://stackoverflow.com/questions/6139107/programmatically-select-text-in-a-contenteditable-html-element
             let range = document.createRange();
@@ -397,27 +405,29 @@ function preparecard(item) {
 
         })
     })
-    
+
 
     item.find('a.internallink').click(internallink);
 
 }
-function finishRenaming(obj,rejectChanges=false){
-    let filetitle=obj.parent();
-    filetitle.css('pointer-events', '')
+function finishRenaming(obj, rejectChanges = false) {
+    let filetitle = obj.parent();
+    filetitle.css('pointer-events', '').removeClass('renaming');
     filetitle.off('click');
-    obj.prop('contenteditable',false);
+    obj.prop('contenteditable', false);
     window.getSelection().removeAllRanges();
 
-    let result=obj.text();
-    if(rejectChanges||result==''||result=='.'||result=='..'||result==obj.attr('data-oldname')){
+    let result = obj.text();
+    let button = obj.parents().filter('.mdl-cell').find('.filerenamer');
+    if (rejectChanges || result == '' || result == '.' || result == '..' || result == obj.attr('data-oldname')) {
         obj.text(obj.attr('data-oldname'));
-    }else{
-        let button=obj.parents().filter('.mdl-cell').find('.filerenamer');
+        let oldfiletitle = $('<a class="mdl-card__title filetitle">').attr('href',decodeURIComponent(button.attr('data-path'))).append(filetitle.contents())
+        filetitle.replaceWith(oldfiletitle);
+    } else {
         console.log(decodeURIComponent(button.attr('data-path')))
         $('#file-modify-action').val('move')
         $('#file-modify-path').val(decodeURIComponent(button.attr('data-path')))
-        $('#file-modify-new-path').val(decodeURIComponent(button.attr('data-dir'))+result)
+        $('#file-modify-new-path').val(decodeURIComponent(button.attr('data-dir')) + result)
         $('#file-modify-return-path').val(location.pathname)
         $('#file-modify-form').trigger('submit');
     }
