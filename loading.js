@@ -183,7 +183,7 @@ function filecard(file) {
     let link = encodeURIComponent(file.name)
     let path = encodeURIComponent(location.pathname);
 
-    let item = $('<div class="mdl-cell mdl-cell--stretch item" >')
+    let item = $('<i class="mdl-cell mdl-cell--stretch item" >')
 
     let card = $('<div draggable="true">');
 
@@ -244,10 +244,12 @@ function filecard(file) {
 
             $('<figcaption>').html(file.lore).appendTo(streamholder);
 
-            lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand">').attr('href', link)
+            lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link)
 
             card.addClass('card-image thumbnail')
             item.addClass('stream-holder-item')
+
+            cardTitle.addClass('filepreview')
             // card.attr('data-thumb','url(\'/gregornet/thumbnail.py?file='+path + link+'\') no-repeat top / cover')
         }
         if (config.html.includes(file.type)) {
@@ -282,6 +284,7 @@ function filecard(file) {
         cardActions.appendTo(card);
 
         let cardMenu = $('<div class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect">').attr('for', 'menu-' + file.random)
+        $('<div class="mdl-menu__item filepreview" >').text('Preview').appendTo(cardMenu);
         $('<a class="mdl-menu__item" download>').text('Download').attr({
             'href': link
         }).appendTo(cardMenu);
@@ -332,7 +335,7 @@ function filecard(file) {
     card.prepend(cardTitle)
 
     item.attr('data-random', file.random);
-    item.append(card)
+    item.prepend(card);
     // item.append(listItem)
     return item;
 }
@@ -374,7 +377,7 @@ function preparecard(item) {
             //.addClass('renaming');
             oldfiletitle.replaceWith(filetitle);
 
-            filetitle.parent().prop('draggable',false);
+            filetitle.parent().prop('draggable', false);
             // filetitle.css('pointer-events', 'none')
             // filetitle.css('color', 'red')
             // filetitle.click(function(e){
@@ -407,8 +410,20 @@ function preparecard(item) {
     })
 
 
+    item.find('.filepreview').each(function () {
+        $(this).click(filePreview);
+    })
+
+
     item.find('a.internallink').click(internallink);
 
+}
+
+function filePreview(e) {
+    !$(this).parents().filter('.item.previewing').length && e && e.preventDefault();
+    $('.previewing').removeClass('previewing');
+    $(this).parents().filter('.item').addClass('previewing');
+    lazyLoadNextImage();
 }
 function finishRenaming(obj, rejectChanges = false) {
     let filetitle = obj.parent();
@@ -421,7 +436,7 @@ function finishRenaming(obj, rejectChanges = false) {
     let button = obj.parents().filter('.mdl-cell').find('.filerenamer');
     if (rejectChanges || result == '' || result == '.' || result == '..' || result == obj.attr('data-oldname')) {
         obj.text(obj.attr('data-oldname'));
-        let oldfiletitle = $('<a class="mdl-card__title filetitle">').attr('href',decodeURIComponent(button.attr('data-path'))).append(filetitle.contents())
+        let oldfiletitle = $('<a class="mdl-card__title filetitle">').attr('href', decodeURIComponent(button.attr('data-path'))).append(filetitle.contents())
         filetitle.replaceWith(oldfiletitle);
     } else {
         console.log(decodeURIComponent(button.attr('data-path')))
@@ -453,8 +468,8 @@ function lazyLoadNextImage() {
     //     })
     // })
     // }
-    if ($('.mode-stream img.stream-image-notloaded').length) {
-        $('.mode-stream img.stream-image-notloaded').eq(0).each(function () {
+    if ($('img.stream-image-notloaded').length) {
+        $('img.stream-image-notloaded').eq(0).each(function () {
             $('#size-' + $(this).attr('id')).text('Loading...')
             $(this).attr('src', encodeURIComponent($(this).attr('alt'))).one('load', function () {
                 $(this).removeClass('stream-image-notloaded').addClass('stream-image-loaded')

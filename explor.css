@@ -392,6 +392,7 @@ button.pagenumber {
     position: relative;
     transition: width .2s cubic-bezier(.4, 0, .2, 1);
     width: calc(25% - 16px);
+    font-style: inherit;
 }
 
 .mode-list .item {
@@ -917,6 +918,40 @@ li:hover .listaction {
     border-left: solid;
 }
 
+
+
+.item > .mdl-card{
+    height: auto;
+    position: relative;
+}
+
+.mode-default .item.previewing .stream-holder,
+.mode-list .item.previewing .stream-holder{
+    display: block;
+    width: 100vw;
+    margin: 16px min(calc( 472px - 50vw), -16px) 0;
+}
+
+.mode-default .item.previewing .stream-holder img,
+.mode-list .item.previewing .stream-holder img{
+    max-height:none;
+}
+
+.mode-default .item.previewing:nth-of-type(4n-3) .stream-holder,
+.mode-list .item.previewing:nth-of-type(2n-1) .stream-holder{
+    transform: translateX(-0px);
+}
+.mode-default .item.previewing:nth-of-type(4n-2) .stream-holder{
+    transform: translateX(calc(max(-960px,calc(16px - 100vw)) * 1 / 4));
+}
+.mode-default .item.previewing:nth-of-type(4n-1) .stream-holder,
+.mode-list .item.previewing:nth-of-type(2n) .stream-holder{
+    transform: translateX(calc(max(-960px,calc(16px - 100vw)) * 2 / 4));
+}
+.mode-default .item.previewing:nth-of-type(4n) .stream-holder{
+    transform: translateX(calc(max(-960px,calc(16px - 100vw)) * 3 / 4));
+}
+
 @media (max-width: 839px) {
     .item {
         width: calc(33.33% - 16px);
@@ -925,17 +960,41 @@ li:hover .listaction {
     .mode-list .item {
         width: calc(100% - 16px);
     }
+
+    .mode-default .item.previewing:nth-of-type(3n-2) .stream-holder,
+    .mode-list .item.previewing:nth-of-type(n) .stream-holder{
+        transform: translateX(-0px);
+    }
+    .mode-default .item.previewing:nth-of-type(3n-1) .stream-holder{
+        transform: translateX(calc((16px - 100vw) * 1 / 3));
+    }
+    .mode-default .item.previewing:nth-of-type(3n) .stream-holder{
+        transform: translateX(calc((16px - 100vw) * 2 / 3));
+    }
 }
 
 @media (max-width: 559px) {
     .item {
         width: calc(50% - 16px);
     }
+
+    .mode-default .item.previewing:nth-of-type(2n-1) .stream-holder,
+    .mode-list .item.previewing:nth-of-type(n) .stream-holder{
+        transform: translateX(-0px);
+    }
+    .mode-default .item.previewing:nth-of-type(2n) .stream-holder{
+        transform: translateX(calc((16px - 100vw) * 1 / 2));
+    }
 }
 
 @media (max-width: 279px) {
     .item {
         width: calc(100% - 16px);
+    }
+
+    .mode-default .item.previewing:nth-of-type(n) .stream-holder,
+    .mode-list .item.previewing:nth-of-type(n) .stream-holder{
+        transform: translateX(-0px);
     }
 }
 
