@@ -235,13 +235,13 @@ function filecard(file) {
         let actions = [];
 
         if (config.images.includes(file.type)) {
-            let streamholder = $('<figure class="m m-stream stream-holder stream-notloaded">')
+            let streamholder = $('<figure class="m m-stream full-width stream-holder stream-notloaded">')
 
             // $('<img src="/gregornet/baseline_photo_white_18dp.png" class="stream-image stream-image-notloaded" loading="lazy">').attr({ src: '/gregornet/thumbnail.py?file='+path+link, 'id': file.random, 'alt': file.name }).appendTo(streamholder);
             $('<img src="" class="stream-image stream-image-notloaded" >')
-            .attr({ 'data-thumb-src': '/gregornet/thumbnail.py?file=' + path + encodeURIComponent(link), 'id': file.random, 'alt': file.name })
-            .on('click',function(){$(this).toggleClass('zoomed')})
-            .appendTo(streamholder);
+                .attr({ 'data-thumb-src': '/gregornet/thumbnail.py?file=' + path + encodeURIComponent(link), 'id': file.random, 'alt': file.name })
+                .on('click', function () { $(this).toggleClass('zoomed') })
+                .appendTo(streamholder);
 
 
             $('<a class="stream-caption">').attr('href', link).text(file.name + ' | ').append($('<output>').text('Thumbnail loading...').attr('id', 'size-' + file.random)).appendTo(streamholder);
@@ -251,7 +251,7 @@ function filecard(file) {
 
             lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link)
 
-            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb',encodeURIComponent(location.pathname + item.find('a').attr('href')))
+            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb', encodeURIComponent(location.pathname + item.find('a').attr('href')))
             item.addClass('stream-holder-item')
 
             cardTitle.addClass('filepreview')
@@ -427,29 +427,35 @@ function preparecard(item) {
 function filePreview(e) {
     e && e.preventDefault();
 
-    if($(this).parents().filter('.item.previewing').length){
-
-        $('.previewing').removeClass('previewing');
+    if ($(this).parents().filter('.item.previewing').length) {
+        $('.previewing').removeClass('previewing').children('.stream-holder')[0].style.gridRow = '';
         return;
     }
     $('.previewing').removeClass('previewing');
-    let item =  $(this).parents().filter('.item')
-    // determine row to put element in
-    let count = 1;
-    let previtems = item.prevAll().each(function(){
-        if($(this).css('display')=='none') return;
-        if($(this).hasClass('item')){
-            count+=1;
-        }else{
-            count+=4;
-        }
-    });
-    console.log(Math.ceil(count/4))
-    item.children('.stream-holder')[0].style.gridRow=Math.ceil(count/4)+1;
+    let item = $(this).parents().filter('.item')
 
 
     item.addClass('previewing');
+    calculateGridRow();
     lazyLoadNextImage();
+}
+function calculateGridRow() {
+    // determine row to put element in
+    let item = $('.previewing');
+    if (item.length == 0) return;
+    let count = 1;
+    let columnCount = +$('.full-width').css('grid-column-end').replace('span ', '').replace('auto', '1')
+    item.prevAll().each(function () {
+        if ($(this).css('display') == 'none') return;
+        if ($(this).hasClass('full-width')) {
+            count += columnCount;
+        } else {
+            count += 1;
+        }
+    });
+    console.log(count)
+    // item.children('.stream-holder').css('grid-row',Math.ceil(count/columnCount)+1);
+    item.children('.stream-holder')[0].style.gridRow = Math.ceil(count / columnCount) + 1;
 }
 function finishRenaming(obj, rejectChanges = false) {
     let filetitle = obj.parent();
@@ -475,7 +481,7 @@ function finishRenaming(obj, rejectChanges = false) {
 }
 
 function lazyLoadNextImage() {
-    if($('.stream-loading').length) return;
+    if ($('.stream-loading').length) return;
     // if($('.mode-stream img.stream-image-thumbnailed').length > 6 || !$('.mode-stream img.stream-image-notloaded').length){
     //     $('.mode-stream img.stream-image-thumbnailed').eq(0).each(function () {
     //         $('#size-' + $(this).attr('id')).text('Loading...')
@@ -499,10 +505,10 @@ function lazyLoadNextImage() {
     if (selector.length) {
         selector.eq(0).each(function () {
             let thisdis = $(this).offset().top - $('html').scrollTop()
-            if(thisdis>$('html').height()*5) return;
-            if($(this).attr('src')!="") return;
+            if (thisdis > $('html').height() * 5) return;
+            if ($(this).attr('src') != "") return;
 
-                $(this).parent().removeClass('stream-notloaded').addClass('stream-loading')
+            $(this).parent().removeClass('stream-notloaded').addClass('stream-loading')
             $('#size-' + $(this).attr('id')).text('Loading...')
             $(this).attr('src', encodeURIComponent($(this).attr('alt'))).one('load', function () {
                 // $(this).removeClass('stream-image-notloaded').addClass('stream-image-loaded')
@@ -514,20 +520,20 @@ function lazyLoadNextImage() {
     }
 }
 // lazyLoadNextImage()
-function lazyLoadNextThumbnail(){
-    if($('.mode-list, .thumb-loading').length) return;
+function lazyLoadNextThumbnail() {
+    if ($('.mode-list, .thumb-loading').length) return;
     let selector = $('.thumb-notloaded');
     if (selector.length) {
         selector.each(function () {
-            if($(this).css('display')=='none') selector=selector.not(this);
-            let thisdis = ($(this).offset().top - $('html').scrollTop())/$('html').height();
-            if(0 > thisdis || thisdis > 2) selector=selector.not(this);
+            if ($(this).css('display') == 'none') selector = selector.not(this);
+            let thisdis = ($(this).offset().top - $('html').scrollTop()) / $('html').height();
+            if (0 > thisdis || thisdis > 2) selector = selector.not(this);
         })
     }
-    selector.eq(0).each(function(){
+    selector.eq(0).each(function () {
         $(this).removeClass('thumb-notloaded').addClass('thumb-loading');
-        $('<img class="hidden">').attr('src','/gregornet/thumbnail.py?file='+$(this).attr('data-thumb')).appendTo($(this)).on('load',function(){
-            $(this).parent().css('background-image','url("'+ $(this).attr('src') +'")').removeClass('thumb-loading');
+        $('<img class="hidden">').attr('src', '/gregornet/thumbnail.py?file=' + $(this).attr('data-thumb')).appendTo($(this)).on('load', function () {
+            $(this).parent().css('background-image', 'url("' + $(this).attr('src') + '")').removeClass('thumb-loading');
             $(this).remove();
             lazyLoadNextThumbnail();
         })

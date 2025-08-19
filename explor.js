@@ -96,10 +96,11 @@ function init() {
     $('body').one('touchstart', function () {
         $('body').addClass('touchstart')
     })
-    $(document).on('scrollend',function(){
+    $(document).on('scrollend', function () {
         lazyLoadNextImage();
         lazyLoadNextThumbnail();
-    });
+    })
+    window.onresize = calculateGridRow;
 
     $('body').keydown(function (e) {
         // e.preventDefault();
@@ -382,7 +383,7 @@ function loadFolder() {
                 let loreelem = $('.loadspinner')
 
                 for (let i = 0; i < data.lores.length; i++) {
-                    loreelem = $('<article class="lore mdl-cell mdl-cell--12-col markdown">').html(data.lores[i]).insertAfter(loreelem);
+                    loreelem = $('<article class="lore mdl-cell full-width markdown">').html(data.lores[i]).insertAfter(loreelem);
 
                 }
             }
@@ -478,16 +479,16 @@ function drop(e) {
     if (e.dataTransfer.getData("gregornet")) {
         let oldpath = e.dataTransfer.getData("path").toString();
         let newpath = targetPath + e.dataTransfer.getData("name").toString();
-        
-        if (oldpath == newpath) return;
-            preventScroll = $('html').scrollTop();
 
-            $('#file-modify-action').val('move');
-            $('#file-modify-path').val(oldpath);
-            $('#file-modify-new-path').val(newpath);
-            $('#file-modify-return-path').val(location.pathname);
-            $('#file-modify-form').trigger('submit');
-        
+        if (oldpath == newpath) return;
+        preventScroll = $('html').scrollTop();
+
+        $('#file-modify-action').val('move');
+        $('#file-modify-path').val(oldpath);
+        $('#file-modify-new-path').val(newpath);
+        $('#file-modify-return-path').val(location.pathname);
+        $('#file-modify-form').trigger('submit');
+
     }
     // console.log(e.dataTransfer);
     console.log(e);
@@ -570,11 +571,19 @@ function changemode(mode, item) {
     $('#modechanger-menu-button>i').text('view_' + (mode == 'default' ? 'module' : mode))
     $('.modechanger-menu li').removeClass('bold').filter('.m-' + mode).addClass('bold')
 
+    if (mode == 'stream') {
+        $('.previewing').removeClass('previewing')
+        $('.stream-holder').each(function () {
+            this.style.gridRow = '';
+        })
+    } else calculateGridRow();
+
     lazyLoadNextImage();
+    lazyLoadNextThumbnail();
     // item = item ? item : $('.item');
     // item.each(function () {
 
-    //     $(this).removeClass('blackitem mdl-list__item hidden mdl-cell--3-col mdl-cell--6-col mdl-cell--12-col mdl-cell--4-col-tablet mdl-cell--8-col-tablet mdl-cell--2-col-phone mdl-cell--4-col-phone');
+    //     $(this).removeClass('blackitem mdl-list__item hidden mdl-cell--3-col mdl-cell--6-col full-width mdl-cell--4-col-tablet mdl-cell--8-col-tablet mdl-cell--2-col-phone mdl-cell--4-col-phone');
 
     //     switch (mode) {
     //         case 'default':
@@ -593,7 +602,7 @@ function changemode(mode, item) {
     //                     $(this).addClass('mdl-cell--3-col mdl-cell--4-col-tablet mdl-cell--2-col-phone');
     //                     break;
     //                 case 'image':
-    //                     $(this).addClass('mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone');
+    //                     $(this).addClass('full-width mdl-cell--8-col-tablet mdl-cell--4-col-phone');
     //                     break;
     //                 default:
     //                     $(this).addClass('hidden')
@@ -794,7 +803,7 @@ function scrollpagechips() {
 function closestli(reverse) {
     let proximity = reverse ? -Infinity : Infinity;
     let closest;
-    if ($('.stream-loading').length==0 && !reverse && $('html').scrollTop() > $('.mdl-layout').height() - $('html').height() - 10) {
+    if ($('.stream-loading').length == 0 && !reverse && $('html').scrollTop() > $('.mdl-layout').height() - $('html').height() - 10) {
         if (+pathStorage('page') == Math.ceil(listdir.length / config.pageSize) - 1) {
             showSnackbar('end of folder')
         } else {
