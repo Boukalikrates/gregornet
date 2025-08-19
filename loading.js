@@ -421,13 +421,29 @@ function preparecard(item) {
 
 function filePreview(e) {
     e && e.preventDefault();
+
     if($(this).parents().filter('.item.previewing').length){
 
         $('.previewing').removeClass('previewing');
         return;
     }
     $('.previewing').removeClass('previewing');
-    $(this).parents().filter('.item').addClass('previewing');
+    let item =  $(this).parents().filter('.item')
+    // determine row to put element in
+    let count = 1;
+    let previtems = item.prevAll().each(function(){
+        if($(this).css('display')=='none') return;
+        if($(this).hasClass('item')){
+            count+=1;
+        }else{
+            count+=4;
+        }
+    });
+    console.log(Math.ceil(count/4))
+    item.children('.stream-holder')[0].style.gridRow=Math.ceil(count/4)+1;
+
+
+    item.addClass('previewing');
     lazyLoadNextImage();
 }
 function finishRenaming(obj, rejectChanges = false) {
