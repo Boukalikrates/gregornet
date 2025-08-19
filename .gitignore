@@ -5,3 +5,5 @@ __pycache__
 gregornet.code-workspace
 *.pyc
 .vscode
+config.json
+pathConfig.json
