@@ -420,7 +420,12 @@ function preparecard(item) {
 }
 
 function filePreview(e) {
-    !$(this).parents().filter('.item.previewing').length && e && e.preventDefault();
+    e && e.preventDefault();
+    if($(this).parents().filter('.item.previewing').length){
+
+        $('.previewing').removeClass('previewing');
+        return;
+    }
     $('.previewing').removeClass('previewing');
     $(this).parents().filter('.item').addClass('previewing');
     lazyLoadNextImage();
