@@ -96,7 +96,10 @@ function init() {
     $('body').one('touchstart', function () {
         $('body').addClass('touchstart')
     })
-
+    $(document).on('scrollend',function(){
+        lazyLoadNextImage();
+        lazyLoadNextThumbnail();
+    });
 
     $('body').keydown(function (e) {
         // e.preventDefault();
@@ -791,7 +794,7 @@ function scrollpagechips() {
 function closestli(reverse) {
     let proximity = reverse ? -Infinity : Infinity;
     let closest;
-    if (!reverse && $('html').scrollTop() > $('.mdl-layout').height() - $('html').height() - 10) {
+    if ($('.stream-loading').length==0 && !reverse && $('html').scrollTop() > $('.mdl-layout').height() - $('html').height() - 10) {
         if (+pathStorage('page') == Math.ceil(listdir.length / config.pageSize) - 1) {
             showSnackbar('end of folder')
         } else {
@@ -799,7 +802,7 @@ function closestli(reverse) {
         }
     }
 
-    $('.item').each(function () {
+    $('.item>*').each(function () {
         let thisdis = $(this).offset().top - $('html').scrollTop();// + (reverse ? $(this).height() : 0);
         let condition = reverse ? (-100 > thisdis && thisdis > proximity) : (100 < thisdis && thisdis < proximity);
         if (condition) {

@@ -71,6 +71,7 @@ function loadPage(n) {
     componentHandler.upgradeDom();
     scrollpagechips();
     lazyLoadNextImage();
+    lazyLoadNextThumbnail();
     findAndMarkNowPlaying();
     $('html').animate({
         scrollTop: 0
@@ -203,7 +204,8 @@ function filecard(file) {
         let thumbdiv = $('<a draggable="false" class="dirthumbs mdl-card__media internallink">').attr('href', link)
         for (let j = 0; j < file.thumbs.length; j++) {
             // $('<div class="dirthumb">').appendTo(thumbdiv)
-            $('<div class="dirthumb">').css('background', 'url("/gregornet/thumbnail.py?file=' + encodeURIComponent(file.thumbs[j]) + '")  no-repeat top / cover').appendTo(thumbdiv)
+            // $('<div class="dirthumb">').css('background', 'url("/gregornet/thumbnail.py?file=' + encodeURIComponent(file.thumbs[j]) + '")  no-repeat top / cover').appendTo(thumbdiv)
+            $('<div class="dirthumb thumb-notloaded">').attr('data-thumb', encodeURIComponent(file.thumbs[j])).appendTo(thumbdiv)
         }
 
 
@@ -233,10 +235,13 @@ function filecard(file) {
         let actions = [];
 
         if (config.images.includes(file.type)) {
-            let streamholder = $('<figure class="m m-stream stream-holder">')
+            let streamholder = $('<figure class="m m-stream stream-holder stream-notloaded">')
 
             // $('<img src="/gregornet/baseline_photo_white_18dp.png" class="stream-image stream-image-notloaded" loading="lazy">').attr({ src: '/gregornet/thumbnail.py?file='+path+link, 'id': file.random, 'alt': file.name }).appendTo(streamholder);
-            $('<img src="/gregornet/baseline_photo_white_18dp.png" class="stream-image stream-image-notloaded" >').attr({ 'data-thumb-src': '/gregornet/thumbnail.py?file=' + path + encodeURIComponent(link), 'id': file.random, 'alt': file.name }).appendTo(streamholder);
+            $('<img src="" class="stream-image stream-image-notloaded" >')
+            .attr({ 'data-thumb-src': '/gregornet/thumbnail.py?file=' + path + encodeURIComponent(link), 'id': file.random, 'alt': file.name })
+            .on('click',function(){$(this).toggleClass('zoomed')})
+            .appendTo(streamholder);
 
 
             $('<a class="stream-caption">').attr('href', link).text(file.name + ' | ').append($('<output>').text('Thumbnail loading...').attr('id', 'size-' + file.random)).appendTo(streamholder);
@@ -246,7 +251,7 @@ function filecard(file) {
 
             lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link)
 
-            card.addClass('card-image thumbnail')
+            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb',encodeURIComponent(location.pathname + item.find('a').attr('href')))
             item.addClass('stream-holder-item')
 
             cardTitle.addClass('filepreview')
@@ -354,7 +359,7 @@ function preparecard(item) {
     item[0].ondragstart = drag;
     item.find('.thumbnail').each(function () {
         // $(this).css('background', $(this).attr('data-thumb'))
-        $(this).css('background-image', 'url("/gregornet/thumbnail.py?file=' + encodeURIComponent(location.pathname + item.find('a').attr('href')) + '")')
+        // $(this).css('background-image', 'url("/gregornet/thumbnail.py?file=' + encodeURIComponent(location.pathname + item.find('a').attr('href')) + '")')
 
     })
     item.find('.fileremover').each(function () {
@@ -470,6 +475,7 @@ function finishRenaming(obj, rejectChanges = false) {
 }
 
 function lazyLoadNextImage() {
+    if($('.stream-loading').length) return;
     // if($('.mode-stream img.stream-image-thumbnailed').length > 6 || !$('.mode-stream img.stream-image-notloaded').length){
     //     $('.mode-stream img.stream-image-thumbnailed').eq(0).each(function () {
     //         $('#size-' + $(this).attr('id')).text('Loading...')
@@ -489,11 +495,18 @@ function lazyLoadNextImage() {
     //     })
     // })
     // }
-    if ($('img.stream-image-notloaded').length) {
-        $('img.stream-image-notloaded').eq(0).each(function () {
+    let selector = $('.mode-stream .stream-notloaded img, .previewing .stream-notloaded img');
+    if (selector.length) {
+        selector.eq(0).each(function () {
+            let thisdis = $(this).offset().top - $('html').scrollTop()
+            if(thisdis>$('html').height()*5) return;
+            if($(this).attr('src')!="") return;
+
+                $(this).parent().removeClass('stream-notloaded').addClass('stream-loading')
             $('#size-' + $(this).attr('id')).text('Loading...')
             $(this).attr('src', encodeURIComponent($(this).attr('alt'))).one('load', function () {
-                $(this).removeClass('stream-image-notloaded').addClass('stream-image-loaded')
+                // $(this).removeClass('stream-image-notloaded').addClass('stream-image-loaded')
+                $(this).parent().removeClass('stream-notloaded stream-loading').addClass('stream-loaded')
                 $('#size-' + $(this).attr('id')).text(this.naturalWidth + 'x' + this.naturalHeight)
                 lazyLoadNextImage();
             })
@@ -501,3 +514,24 @@ function lazyLoadNextImage() {
     }
 }
 // lazyLoadNextImage()
+function lazyLoadNextThumbnail(){
+    if($('.mode-list, .thumb-loading').length) return;
+    let selector = $('.thumb-notloaded');
+    if (selector.length) {
+        selector.each(function () {
+            if($(this).css('display')=='none') selector=selector.not(this);
+            let thisdis = ($(this).offset().top - $('html').scrollTop())/$('html').height();
+            if(0 > thisdis || thisdis > 2) selector=selector.not(this);
+        })
+    }
+    selector.eq(0).each(function(){
+        $(this).removeClass('thumb-notloaded').addClass('thumb-loading');
+        $('<img class="hidden">').attr('src','/gregornet/thumbnail.py?file='+$(this).attr('data-thumb')).appendTo($(this)).on('load',function(){
+            $(this).parent().css('background-image','url("'+ $(this).attr('src') +'")').removeClass('thumb-loading');
+            $(this).remove();
+            lazyLoadNextThumbnail();
+        })
+    });
+
+    // console.log(selector.length)
+}

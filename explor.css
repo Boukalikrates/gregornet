@@ -447,6 +447,7 @@ button.pagenumber {
 
     outline: solid 2px transparent;
     transition: outline .2s cubic-bezier(.4, 0, .2, 1);
+    margin: 8px;
 }
 
 .mode-list .item>.mdl-card {
@@ -693,9 +694,23 @@ body.stickyheader-sometimes.mode-list .markdown img {
     filter: blur(5px);
 }
 
-.stream-image.stream-image-notloaded {
-    width: 1px;
+.stream-holder.stream-notloaded{
+    /* a little trick to have them all the same place */
+    height: 36px;
+    margin: -18px;
+    opacity: 0;
+    z-index: -4;
 }
+
+/* .item:last-of-type 
+.stream-holder.stream-notloaded{
+    height: auto;
+    margin: 8px;
+    opacity: 1;
+    z-index: inherit;
+} */
+
+
 
 img.stream-image:hover {
     background: url(grid.png);
@@ -708,7 +723,8 @@ audio.stream-image {
 .stream-holder {
     position: relative;
     padding: 0;
-    margin: 0 min(calc(472px - 50vw), -16px);
+    /* margin: 0 min(calc(472px - 50vw), -16px); */
+    margin: 8px min(calc(480px - 50vw), 0px);
     z-index: 2;
 }
 
@@ -720,6 +736,10 @@ audio.stream-image {
     color: white;
     width: 100%;
     opacity: 0;
+}
+
+.stream-holder figcaption{
+    padding: 0 32px;
 }
 
 .stream-image:hover+.stream-caption,
@@ -943,22 +963,17 @@ li:hover .listaction {
     position: relative;
 }
 
-.item.previewing .mdl-card{
-    /* margin-bottom:-16px;
-    border-bottom: 16px solid;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0; */
-}
 
 .mode-default .item.previewing .stream-holder,
 .mode-list .item.previewing .stream-holder {
     display: block;
-    width: 100vw;
-    margin: 0px min(calc(472px - 50vw), -16px) 0;
+    /* width: 100vw; */
+    /* margin: 0; */
 }
 
-.mode-default .item.previewing .stream-holder img,
-.mode-list .item.previewing .stream-holder img {
+/* .mode-default .item.previewing .stream-holder img,
+.mode-list .item.previewing .stream-holder img, */
+.stream-holder img.zoomed {
     max-height: none;
 }
 
@@ -1064,7 +1079,7 @@ li:hover .listaction {
 .maingrid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 16px;
+    gap: 0;
 }
 
 .pathtree,
