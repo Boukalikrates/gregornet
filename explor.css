@@ -485,17 +485,29 @@ button.pagenumber {
     display: none;
 }
 
+
 .dirthumb {
     flex-grow: 1;
     height: 100px;
     overflow: hidden;
     font-size: 0;
+
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    background-origin: padding-box;
+    background-clip: border-box;
 }
 
 .dirthumbs {
     display: flex;
+    background-color: inherit;
 }
 
+.thumb-failed{
+    background-image: url(/gregornet/broken_image.png) ;
+    background-size: 100% 100%;
+}
 .card-dir {
     min-height: 0;
 }
@@ -586,10 +598,6 @@ button.pagenumber {
 .filetitle>.filetitletext {
     overflow: hidden;
     text-overflow: ellipsis;
-}
-
-.dirthumbs {
-    background-color: inherit;
 }
 
 .cardactions {

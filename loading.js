@@ -59,7 +59,7 @@ function loadPage(n) {
     for (let i = start; i < end; i++) {
 
         let card = filecard(filteredListdir[i]);
-        card.insertBefore($('.afterbase').last());
+        card.insertBefore($('.afterbase').first());
 
         preparecard(card);
 
@@ -509,11 +509,19 @@ function lazyLoadNextImage() {
             if ($(this).attr('src') != "") return;
 
             $(this).parent().removeClass('stream-notloaded').addClass('stream-loading')
+            $('.loadspinner').show();
             $('#size-' + $(this).attr('id')).text('Loading...')
             $(this).attr('src', encodeURIComponent($(this).attr('alt'))).one('load', function () {
                 // $(this).removeClass('stream-image-notloaded').addClass('stream-image-loaded')
-                $(this).parent().removeClass('stream-notloaded stream-loading').addClass('stream-loaded')
-                $('#size-' + $(this).attr('id')).text(this.naturalWidth + 'x' + this.naturalHeight)
+                $(this).parent().removeClass('stream-notloaded stream-loading').addClass('stream-loaded');
+                $('#size-' + $(this).attr('id')).text(this.naturalWidth + 'x' + this.naturalHeight);
+                $('.loadspinner').hide();
+                lazyLoadNextImage();
+            }).on('error',function(){
+                // $(this).attr('src','/gregornet/broken_image.png')
+                $(this).parent().removeClass('stream-notloaded stream-loading').addClass('stream-failed');
+                $('#size-' + $(this).attr('id')).text('Error loading');
+                $('.loadspinner').hide();
                 lazyLoadNextImage();
             })
         })
@@ -534,6 +542,10 @@ function lazyLoadNextThumbnail() {
         $(this).removeClass('thumb-notloaded').addClass('thumb-loading');
         $('<img class="hidden">').attr('src', '/gregornet/thumbnail.py?file=' + $(this).attr('data-thumb')).appendTo($(this)).on('load', function () {
             $(this).parent().css('background-image', 'url("' + $(this).attr('src') + '")').removeClass('thumb-loading');
+            $(this).remove();
+            lazyLoadNextThumbnail();
+        }).on('error',function(){
+            $(this).parent().removeClass('thumb-loading').addClass('thumb-failed');
             $(this).remove();
             lazyLoadNextThumbnail();
         })

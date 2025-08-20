@@ -383,7 +383,7 @@ function loadFolder() {
                 let loreelem = $('.loadspinner')
 
                 for (let i = 0; i < data.lores.length; i++) {
-                    loreelem = $('<article class="lore mdl-cell full-width markdown">').html(data.lores[i]).insertAfter(loreelem);
+                    loreelem = $('<article class="lore full-width markdown">').html(data.lores[i]).insertAfter(loreelem);
 
                 }
             }
