@@ -1,5 +1,6 @@
 function loadPage(n) {
     //for (let i = 0; i < filteredListdir.length; i++) {
+    $(' .stream-holder').remove();
     $('.item, .itemph, .pagechip').remove();
     let filteredListdir = listdirFilter(listdir);
     let start = 0;
@@ -246,6 +247,7 @@ function filecard(file) {
 
             $('<a class="stream-caption">').attr('href', link).text(file.name + ' | ').append($('<output>').text('Thumbnail loading...').attr('id', 'size-' + file.random)).appendTo(streamholder);
             item.append(streamholder);
+            // streamholder.insertAfter(item);
 
             $('<figcaption>').html(file.lore).appendTo(streamholder);
 
@@ -418,7 +420,7 @@ function preparecard(item) {
     item.find('.filepreview').each(function () {
         $(this).click(filePreview);
     })
-
+    item.find('.stream-holder').detach().insertAfter(item);
 
     item.find('a.internallink').click(internallink);
 
@@ -428,7 +430,8 @@ function filePreview(e) {
     e && e.preventDefault();
 
     if ($(this).parents().filter('.item.previewing').length) {
-        $('.previewing').removeClass('previewing').children('.stream-holder')[0].style.gridRow = '';
+        // $('.previewing').removeClass('previewing').children('.stream-holder')[0].style.gridRow = '';
+        $('.previewing').removeClass('previewing').next('.stream-holder')[0].style.gridRow = '';
         return;
     }
     $('.previewing').removeClass('previewing');
@@ -455,7 +458,8 @@ function calculateGridRow() {
     });
     console.log(count)
     // item.children('.stream-holder').css('grid-row',Math.ceil(count/columnCount)+1);
-    item.children('.stream-holder')[0].style.gridRow = Math.ceil(count / columnCount) + 1;
+    item.next('.stream-holder')[0].style.gridRow = Math.ceil(count / columnCount) + 1;
+    // item.children('.stream-holder')[0].style.gridRow = Math.ceil(count / columnCount) + 1;
 }
 function finishRenaming(obj, rejectChanges = false) {
     let filetitle = obj.parent();
@@ -501,7 +505,7 @@ function lazyLoadNextImage() {
     //     })
     // })
     // }
-    let selector = $('.mode-stream .stream-notloaded img, .previewing .stream-notloaded img');
+    let selector = $('.mode-stream .stream-notloaded img, .previewing+.stream-notloaded img');
     if (selector.length) {
         selector.eq(0).each(function () {
             let thisdis = $(this).offset().top - $('html').scrollTop()
