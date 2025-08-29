@@ -704,12 +704,12 @@ body.stickyheader-sometimes.mode-list .markdown img {
 
 .stream-holder.stream-notloaded {
     /* a little trick to have them all the same place */
-    /* height: 36px;
+    height: 36px;
     margin: -18px;
     opacity: 0;
-    z-index: -4; */
+    z-index: -4;
     /* it didn't work; trying sth else*/
-    position: absolute;
+    /* position: absolute; */
     opacity: 0;
 } 
 
@@ -735,7 +735,7 @@ audio.stream-image {
     position: relative;
     padding: 0;
     /* margin: 0 min(calc(472px - 50vw), -16px); */
-    margin: 0px min(calc(480px - 50vw), 0px);
+    margin: 8px min(calc(480px - 50vw), 0px);
     z-index: 2;
 }
 
@@ -1012,7 +1012,7 @@ li:hover .listaction {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-columns: repeat(4, calc(25% - 12px));
 
-    gap: 16px;
+    gap: 0 16px;
     padding: 16px;
     position: relative;
 }
@@ -1024,6 +1024,8 @@ li:hover .listaction {
 
 .full-width {
     grid-column: 1 / span 4;
+
+    margin: 8px 0;
 }
 
 .mode-list .full-width {
@@ -1038,7 +1040,7 @@ li:hover .listaction {
     /* display: contents; */
     width: 100%;
     /* overflow: hidden; */
-    margin: 0;
+    margin: 8px 0;
 
 }
 
