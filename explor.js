@@ -811,7 +811,7 @@ function closestli(reverse) {
         }
     }
 
-    $('.item>*').each(function () {
+    $('.mdl-card, .stream-image').each(function () {
         let thisdis = $(this).offset().top - $('html').scrollTop();// + (reverse ? $(this).height() : 0);
         let condition = reverse ? (-100 > thisdis && thisdis > proximity) : (100 < thisdis && thisdis < proximity);
         if (condition) {
