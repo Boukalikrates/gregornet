@@ -704,11 +704,14 @@ body.stickyheader-sometimes.mode-list .markdown img {
 
 .stream-holder.stream-notloaded {
     /* a little trick to have them all the same place */
-    height: 36px;
+    /* height: 36px;
     margin: -18px;
     opacity: 0;
-    z-index: -4;
-}
+    z-index: -4; */
+    /* it didn't work; trying sth else*/
+    position: absolute;
+    opacity: 0;
+} 
 
 /* .item:last-of-type 
 .stream-holder.stream-notloaded{

@@ -519,16 +519,17 @@ function lazyLoadNextImage() {
                 // $(this).removeClass('stream-image-notloaded').addClass('stream-image-loaded')
                 $(this).parent().removeClass('stream-notloaded stream-loading').addClass('stream-loaded');
                 $('#size-' + $(this).attr('id')).text(this.naturalWidth + 'x' + this.naturalHeight);
-                $('.loadspinner').hide();
                 lazyLoadNextImage();
             }).on('error',function(){
                 // $(this).attr('src','/gregornet/broken_image.png')
                 $(this).parent().removeClass('stream-notloaded stream-loading').addClass('stream-failed');
                 $('#size-' + $(this).attr('id')).text('Error loading');
-                $('.loadspinner').hide();
                 lazyLoadNextImage();
             })
         })
+    }else{
+
+                $('.loadspinner').hide();
     }
 }
 // lazyLoadNextImage()
