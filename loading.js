@@ -253,7 +253,7 @@ function filecard(file) {
 
             lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link)
 
-            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb', encodeURIComponent(location.pathname + item.find('a').attr('href')))
+            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb', path + link)
             item.addClass('stream-holder-item')
 
             cardTitle.addClass('filepreview')
@@ -267,7 +267,7 @@ function filecard(file) {
         if ((config.audio.includes(file.type) && config.readAudioCovers) || config.video.includes(file.type)) {
             lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand">').attr('href', link)
 
-            card.addClass('card-video thumbnail')
+            card.addClass('card-video thumbnail thumb-notloaded').attr('data-thumb', path + link)
         }
         if (config.audio.includes(file.type) || config.video.includes(file.type)) {
             actions.push($('<button class="mdl-button mdl-button--icon mdl-js-button play-button" title="Play">').attr({
