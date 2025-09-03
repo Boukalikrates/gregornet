@@ -986,7 +986,7 @@ li:hover .listaction {
 
 /* .mode-default .item.previewing .stream-holder img,
 .mode-list .item.previewing .stream-holder img, */
-.stream-holder img.zoomed {
+.full-width.stream-holder img.zoomed {
     max-height: none;
 }
 
