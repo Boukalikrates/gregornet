@@ -731,11 +731,10 @@ audio.stream-image {
     width: 100%;
 }
 
-.stream-holder {
+figure.stream-holder {
     position: relative;
     padding: 0;
-    /* margin: 0 min(calc(472px - 50vw), -16px); */
-    margin: 8px min(calc(480px - 50vw), 0px);
+    margin: 8px min(calc(472px - 50vw), -16px);
     z-index: 2;
 }
 
