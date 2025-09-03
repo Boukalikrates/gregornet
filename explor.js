@@ -380,7 +380,7 @@ function loadFolder() {
 
             $('.lore').remove();
             if (data.lores) {
-                let loreelem = $('.loadspinner')
+                let loreelem = $('.here-goes-lore')
 
                 for (let i = 0; i < data.lores.length; i++) {
                     loreelem = $('<article class="lore full-width markdown">').html(data.lores[i]).insertAfter(loreelem);

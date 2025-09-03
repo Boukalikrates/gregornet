@@ -60,7 +60,7 @@ function loadPage(n) {
     for (let i = start; i < end; i++) {
 
         let card = filecard(filteredListdir[i]);
-        card.insertBefore($('.afterbase').first());
+        card.insertBefore($('.loadspinner').first());
 
         preparecard(card);
 
