@@ -747,7 +747,7 @@ function sort(mode, reverse) {
     } else if (pathStorage('reverse')) {
         reverse = pathStorage('reverse');
     } else {
-        reverse = pathStorage('reverse') = 'no';
+        reverse = pathStorage('reverse', 'no');
     }
 
     if (pathStorage('reverse') == 'yes') {
