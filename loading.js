@@ -1,5 +1,9 @@
 function loadPage(n) {
     //for (let i = 0; i < filteredListdir.length; i++) {
+    if($('.mediaplayer').parents('.video-holder').length){
+
+    $('.mediaplayer').detach().appendTo('.mediaplayer-container').addClass('reduced');
+    }
     $(' .stream-holder').remove();
     $('.item, .itemph, .pagechip').remove();
     let filteredListdir = listdirFilter(listdir);
@@ -251,12 +255,12 @@ function filecard(file) {
 
             $('<figcaption>').html(file.lore).appendTo(streamholder);
 
-            lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link)
+            lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link);
 
-            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb', path + link)
-            item.addClass('stream-holder-item')
+            card.addClass('card-image thumbnail thumb-notloaded').attr('data-thumb', path + link);
+            item.addClass('stream-holder-item');
 
-            cardTitle.addClass('filepreview')
+            cardTitle.addClass('filepreview');
             // card.attr('data-thumb','url(\'/gregornet/thumbnail.py?file='+path + link+'\') no-repeat top / cover')
         }
         if (config.html.includes(file.type)) {
@@ -265,21 +269,33 @@ function filecard(file) {
             card.addClass('card-html')
         }
         if ((config.audio.includes(file.type) && config.readAudioCovers) || config.video.includes(file.type)) {
-            lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand">').attr('href', link)
+            let streamholder = $('<figure class="full-width stream-holder video-holder">')
 
-            card.addClass('card-video thumbnail thumb-notloaded').attr('data-thumb', path + link)
+            item.append(streamholder);
+            
+            lore = $('<a draggable="false" class="mdl-card__supporting-text mdl-card--expand filepreview">').attr('href', link);
+
+            card.addClass('card-video thumbnail thumb-notloaded').attr('data-thumb', path + link);
+
+            item.addClass('stream-holder-item');
+
         }
         if (config.audio.includes(file.type) || config.video.includes(file.type)) {
-            actions.push($('<button class="mdl-button mdl-button--icon mdl-js-button play-button" title="Play">').attr({
-                'data-np': file.random,
-                'data-href': link
-            }).append('<i class="material-icons">play_arrow</i>'))
+            // actions.push($('<button class="mdl-button mdl-button--icon mdl-js-button play-button filepreview" title="Play">').attr({
+            //     'data-np': file.random,
+            //     'data-href': link
+            // }).append('<i class="material-icons">play_arrow</i>'))
+
+
+            actions.push($('<button class="mdl-button mdl-button--icon mdl-js-button filepreview" title="Play">').append('<i class="material-icons">play_arrow</i>'))
+
             actions.push($('<a class="mdl-button mdl-button--icon mdl-js-button download-button" title="Download" download>').attr('href', link).append('<i class="material-icons">get_app</i>'))
 
             // gaytag
             actions.push($('<a class="mdl-button mdl-button--icon mdl-js-button download-button" title="Edit tags" target="_blank" >').attr('href', '/Pisane/gaytag/tageditor.html?' + path + link).append('<i class="material-icons">code</i>'))
 
-            card.addClass('card-audio m-stream')
+            card.addClass('card-audio m-stream');
+            cardTitle.addClass('filepreview');
         }
 
         if (lore) card.append(lore);
@@ -432,15 +448,19 @@ function filePreview(e) {
     if ($(this).parents().filter('.item.previewing').length) {
         // $('.previewing').removeClass('previewing').children('.stream-holder')[0].style.gridRow = '';
         $('.previewing').removeClass('previewing').next('.stream-holder')[0].style.gridRow = '';
+        $('.mediaplayer').detach().appendTo('.mediaplayer-container');
         return;
     }
     $('.previewing').removeClass('previewing');
     let item = $(this).parents().filter('.item')
-
-
-    item.addClass('previewing');
-    calculateGridRow();
-    lazyLoadNextImage();
+    if(item.next('.stream-holder').length){
+        item.addClass('previewing');
+        calculateGridRow();
+        lazyLoadNextImage();
+    }
+    if(item.children('.mdl-card').hasClass('card-audio')){
+        audioplay($(this).parents('.mdl-cell').attr('data-random'));
+    }
 }
 function calculateGridRow() {
     // determine row to put element in

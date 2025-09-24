@@ -81,12 +81,26 @@ function audioplay(e) {
     }
 }
 function findAndMarkNowPlaying(){
-
-    $('.now-playing').removeClass('now-playing').find('.play-button i').text('play_arrow');
+    let oldNowPlaying = $('.now-playing');
+    oldNowPlaying.removeClass('now-playing').find('.play-button i').text('play_arrow');
+    oldNowPlaying.parent().removeClass('previewing');
 
     if($('#mediaplayer video').attr('data-np')){{
-        let selected = $('.mdl-cell[data-random=' + $('#mediaplayer video').attr('data-np') + '] .card-audio');
-        if (selected) selected.addClass('now-playing').find('.play-button i').text('music_note');
+        let item = $('.mdl-cell[data-random=' + $('#mediaplayer video').attr('data-np') + ']');
+        if (item){
+            item.children(' .card-audio').addClass('now-playing').find('.play-button i').text('pause');
+            
+            if(item.hasClass('previewing')){
+                $('.mediaplayer').detach().appendTo(item.next('.stream-holder')).removeClass('reduced');
+                console.log(3524)
+            }else{
+
+                $('.mediaplayer').detach().appendTo('.mediaplayer-container');
+            }
+        } else{
+            $('.previewing .card-audio').parent().removeClass('previewing');
+            $('.mediaplayer').detach().appendTo('.mediaplayer-container');
+        } 
     }}
 }
 function audioprogress(e) {

@@ -44,7 +44,7 @@
     color: white;
 }
 
-.dark .mediaplayer {
+.dark .mediaplayer-container .mediaplayer {
     color: white;
     background-color: #000;
 }
@@ -143,7 +143,7 @@
     color: white;
 }
 
-.black .mediaplayer {
+.black .mediaplayer-container .mediaplayer {
     color: white;
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(4px);
@@ -608,7 +608,7 @@ button.pagenumber {
     box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
 }
 
-.now-playing .play-button {
+.now-playing .filetitle .material-icons {
     animation: dance 1s alternate ease-in-out infinite;
 
 }
@@ -700,6 +700,10 @@ body.stickyheader-sometimes.mode-list .markdown img {
 .stream-image.stream-image-thumbnailed {
     width: 100%;
     filter: blur(5px);
+}
+
+.video-holder{
+    display: none;
 }
 
 .stream-holder.stream-notloaded {
@@ -817,17 +821,29 @@ li:hover .listaction {
     background-color: rgb(245, 245, 245);
     color: black;
     display: block;
+    /* overflow: hidden; */
+    transition: 200ms cubic-bezier(.4, 0, .2, 1);
+    z-index: 100;
+}
+.mediaplayer-container .mediaplayer {
+    background-color: rgb(245, 245, 245);
+    color: black;
+    display: block;
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 60px;
     flex: none;
-    z-index: 2;
-    /* overflow: hidden; */
     transition: 200ms cubic-bezier(.4, 0, .2, 1);
     z-index: 100;
 }
+
+.video-holder .mediaplayer {
+    max-height: 100vh;
+    overflow: hidden;
+}
+
 
 .mediaplayer.reduced {
     height: 4px;
@@ -845,6 +861,9 @@ li:hover .listaction {
     bottom: 4px;
 }
 
+.video-holder #audio-hide-btn {
+    display: none;
+}
 #audioprogress {
     width: 100%;
     transition: 200ms cubic-bezier(.4, 0, .2, 1);
@@ -885,14 +904,19 @@ li:hover .listaction {
 .mediaplayer video {
     display: none;
     background-color: black;
+    transition: 200ms cubic-bezier(.4, 0, .2, 1);
+}
+
+.mediaplayer-container .mediaplayer video {
+
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     /* height: 100%; */
     height: 100vh;
-    transition: 200ms cubic-bezier(.4, 0, .2, 1);
 }
+
 
 .mediaplayer.videoEnabled video {
     display: block;
@@ -905,13 +929,16 @@ li:hover .listaction {
     height: 180px;
 }
 
+
+
+
 .mediaplayer.videoEnabled .toolbar {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     position: relative;
 }
 
-.mediaplayer .toolbar>div {
+.mediaplayer-container .mediaplayer .toolbar>div {
     margin-bottom: 100px;
 }
 
@@ -920,6 +947,19 @@ li:hover .listaction {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.video-holder .mediaplayer  .toolbar {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.video-holder .mediaplayer  #audioprogress {
+    width: 100%;
+    position: absolute;
+    bottom: 56px;
+}
+
 
 @keyframes dance {
     0% {
@@ -969,7 +1009,6 @@ li:hover .listaction {
 
 
 .item>.mdl-card {
-    /* height: auto; */
     position: relative;
     margin: 0;
 }
@@ -980,8 +1019,7 @@ li:hover .listaction {
 .mode-default .item.previewing+.stream-holder,
 .mode-list .item.previewing+.stream-holder {
     display: block;
-    /* width: 100vw; */
-    /* margin: 0; */
+    overflow: hidden;
 }
 
 /* .mode-default .item.previewing .stream-holder img,

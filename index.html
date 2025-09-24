@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
     <meta charset="utf-8">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Gregornet">
@@ -16,9 +16,9 @@
     <link rel="manifest" href="/gregornet/manifest.json?22" />
     <script src="/gregornet/mdl/material.min.js"></script>
     <script src="/gregornet/jquery-3.3.1.min.js"></script>
-    <script src="/gregornet/explor.js?22"></script>
-    <script src="/gregornet/loading.js?22"></script>
-    <script src="/gregornet/audio.js?22"></script>
+    <script src="/gregornet/explor.js?23"></script>
+    <script src="/gregornet/loading.js?23"></script>
+    <script src="/gregornet/audio.js?23"></script>
     <title>Gregornet</title>
 </head>
 
@@ -80,15 +80,24 @@
                             <li class="mdl-menu__item modechanger m-stream" data-mode="stream">Stream</li>
                         </ul>
                         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="sort-things1">
-                            <li data-sort='name' data-reverse="no" title="Name" class="mdl-menu__item sortoption">A-Z</li>
-                            <li data-sort='name' data-reverse="yes"  title="Name" class="mdl-menu__item sortoption">Z-A</li>
-                            <li data-sort='modified' data-reverse="no" title="Date" class="mdl-menu__item sortoption">Newest to Oldest</li>
-                            <li data-sort='modified' data-reverse="yes"  title="Date" class="mdl-menu__item sortoption">Oldest to Newest</li>
-                            <li data-sort='size' data-reverse="no" title="Size" class="mdl-menu__item sortoption">Smallest to Biggest</li>
-                            <li data-sort='size' data-reverse="yes"  title="Size" class="mdl-menu__item sortoption">Biggest to Smallest</li>
-                            <li data-sort='type' data-reverse="no" title="Type" class="mdl-menu__item sortoption">Type Ascending</li>
-                            <li data-sort='type' data-reverse="yes"  title="Type" class="mdl-menu__item sortoption">Type Descending</li>
-                            <li data-sort='random' title="Pseudorandom" class="mdl-menu__item sortoption">Pseudorandom</li>
+                            <li data-sort='name' data-reverse="no" title="Name" class="mdl-menu__item sortoption">A-Z
+                            </li>
+                            <li data-sort='name' data-reverse="yes" title="Name" class="mdl-menu__item sortoption">Z-A
+                            </li>
+                            <li data-sort='modified' data-reverse="no" title="Date" class="mdl-menu__item sortoption">
+                                Newest to Oldest</li>
+                            <li data-sort='modified' data-reverse="yes" title="Date" class="mdl-menu__item sortoption">
+                                Oldest to Newest</li>
+                            <li data-sort='size' data-reverse="no" title="Size" class="mdl-menu__item sortoption">
+                                Smallest to Biggest</li>
+                            <li data-sort='size' data-reverse="yes" title="Size" class="mdl-menu__item sortoption">
+                                Biggest to Smallest</li>
+                            <li data-sort='type' data-reverse="no" title="Type" class="mdl-menu__item sortoption">Type
+                                Ascending</li>
+                            <li data-sort='type' data-reverse="yes" title="Type" class="mdl-menu__item sortoption">Type
+                                Descending</li>
+                            <li data-sort='random' title="Pseudorandom" class="mdl-menu__item sortoption">Pseudorandom
+                            </li>
                         </ul>
                         <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="set-color">
                             <li disabled class="mdl-menu__item">
@@ -196,7 +205,8 @@
                     <div class="mdl-tabs__tab-bar">
                         <a href="#settings-local" class="mdl-tabs__tab settings-local" draggable="false">Local</a>
                         <a href="#settings-general" class="mdl-tabs__tab settings-general" draggable="false">Server</a>
-                        <a href="#settings-about" class="mdl-tabs__tab settings-about is-active" draggable="false">About</a>
+                        <a href="#settings-about" class="mdl-tabs__tab settings-about is-active"
+                            draggable="false">About</a>
                     </div>
 
                     <div class="mdl-tabs__panel settings-local" id="settings-local">
@@ -402,7 +412,9 @@
                                     <input class="mdl-textfield__input" type="text" id="config-randomPrefix" value="">
                                     <label class="mdl-textfield__label" for="config-randomPrefix">randomPrefix</label>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="config-randomPrefix">
-                                        Seed for pseudorandom ordering. Type <kbd>&#123;y&#125;</kbd> / <kbd>&#123;mo&#125;</kbd> / <kbd>&#123;d&#125;</kbd> / <kbd>&#123;h&#125;</kbd> / <kbd>&#123;m&#125;</kbd> / <kbd>&#123;s&#125;</kbd> 
+                                        Seed for pseudorandom ordering. Type <kbd>&#123;y&#125;</kbd> /
+                                        <kbd>&#123;mo&#125;</kbd> / <kbd>&#123;d&#125;</kbd> / <kbd>&#123;h&#125;</kbd>
+                                        / <kbd>&#123;m&#125;</kbd> / <kbd>&#123;s&#125;</kbd>
                                         to get a reshuffle every year, month, day, hour, minute or second.
                                     </div>
                                 </div>
@@ -517,7 +529,8 @@
                             </li>
                         </ul>
 
-                        <button type="button" class="mdl-button  mdl-button--raised mdl-button--colored settings-save">Save</button>
+                        <button type="button"
+                            class="mdl-button  mdl-button--raised mdl-button--colored settings-save">Save</button>
                     </div>
                     <div class="mdl-tabs__panel settings-about is-active" id="settings-about">
                         <div class="mdl-list mdl-grid maingrid">
@@ -544,7 +557,7 @@
                                 </div>
                                 <button
                                     class="mdl-button mdl-js-button mdl-button--raised  mdl-button--colored page-reload-btn">Reload</button>
-                                </div>
+                            </div>
                             <div class="legacy-mdl-cell full-width afterbase error-disconnected">
                                 <div class="">Could not connect to server. Check your LAN settings and try again. </div>
                                 <button
@@ -594,49 +607,54 @@
                 </div>
             </footer>
         </main>
-        <div id="mediaplayer" class="mediaplayer reduced mdl-shadow--3dp hidden">
-            <video data-np="" data-np-index="-1"></video>
-            <div id="audioprogress" class="mdl-progress mdl-js-progress"></div>
-            <input id="audioslider" class="mdl-slider mdl-js-slider" type="range" min="0" max="100" step="0.01">
-            <div class="toolbar">
-                <div class="toolbar-left">
-                    <button id="audio-hide-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Hide player">
-                        <i class="material-icons">expand_more</i>
-                    </button>
-                    <button id="audio-previous-btn" class="mdl-button mdl-js-button mdl-button--icon"
-                        title="Previous track">
-                        <i class="material-icons">skip_previous</i>
-                    </button>
-                    <button id="audio-play-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Play">
-                        <i class="material-icons">play_arrow</i>
-                    </button>
-                    <button id="audio-stop-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Stop">
-                        <i class="material-icons">stop</i>
-                    </button>
-                    <button id="audio-next-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Next track">
-                        <i class="material-icons">skip_next</i>
-                    </button>
-                </div>
-                <div class="toolbar-center">
-                    <output id="audio-title">Not playing</output>
+        <div class="mediaplayer-container">
+            <div id="mediaplayer" class="mediaplayer reduced mdl-shadow--3dp hidden">
+                <video class="stream-image" data-np="" data-np-index="-1"></video>
+                <div id="audioprogress" class="mdl-progress mdl-js-progress"></div>
+                <input id="audioslider" class="mdl-slider mdl-js-slider" type="range" min="0" max="100" step="0.01">
+                <div class="toolbar">
+                    <div class="toolbar-left">
+                        <button id="audio-hide-btn" class="mdl-button mdl-js-button mdl-button--icon"
+                            title="Hide player">
+                            <i class="material-icons">expand_more</i>
+                        </button>
+                        <button id="audio-previous-btn" class="mdl-button mdl-js-button mdl-button--icon"
+                            title="Previous track">
+                            <i class="material-icons">skip_previous</i>
+                        </button>
+                        <button id="audio-play-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Play">
+                            <i class="material-icons">play_arrow</i>
+                        </button>
+                        <button id="audio-stop-btn" class="mdl-button mdl-js-button mdl-button--icon" title="Stop">
+                            <i class="material-icons">stop</i>
+                        </button>
+                        <button id="audio-next-btn" class="mdl-button mdl-js-button mdl-button--icon"
+                            title="Next track">
+                            <i class="material-icons">skip_next</i>
+                        </button>
+                    </div>
+                    <div class="toolbar-center">
+                        <output id="audio-title">Not playing</output>
 
-                </div>
-                <div class="toolbar-right">
-                    <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect"
+                    </div>
+                    <div class="toolbar-right">
+                        <!-- <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect"
                     for="audio-autoplay">
                     <input type="checkbox" id="audio-autoplay" class="mdl-switch__input" checked>
                     <span class="mdl-switch__label">Autoplay</span>
-                </label> -->
-                    <output id="audio-output">--:--</output>
-                    <button id="audio-fullscreen" class="mdl-button mdl-js-button mdl-button--icon hidden">
-                        <i class="material-icons">fullscreen</i>
-                    </button>
+                    </label> -->
+                        <output id="audio-output">--:--</output>
+                        <button id="audio-fullscreen" class="mdl-button mdl-js-button mdl-button--icon hidden">
+                            <i class="material-icons">fullscreen</i>
+                        </button>
+                    </div>
                 </div>
+                <button id="audio-show-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab ">
+                    <i class="material-icons">expand_less</i>
+                </button>
             </div>
-            <button id="audio-show-btn" class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab ">
-                <i class="material-icons">expand_less</i>
-            </button>
         </div>
+
     </div>
 
 
@@ -646,8 +664,9 @@
     </div>
 
 
-    <form enctype="multipart/form-data" action="/gregornet/upload.py" method="post" id="file-upload-form" class="hidden">
-        
+    <form enctype="multipart/form-data" action="/gregornet/upload.py" method="post" id="file-upload-form"
+        class="hidden">
+
         <div class="">
             <label>File: <input type="file" name="filename" id="file-upload-name" multiple></label>
             <input type="hidden" name="path" value="" id="file-upload-path">
@@ -666,7 +685,7 @@
         <input type="hidden" name="name" value="" id="file-modify-name">
         <input type="hidden" name="val" value="" id="file-modify-val">
     </form>
-    
+
     <!-- McXxkAsGro5abQVyayKX // these were mo very old passwords
     cG6o5eSN7zoeRPY6XVkZ -->
 
