@@ -409,7 +409,8 @@ function preparecard(item) {
             //     return 21==37;
             // })
             let filetitletext = filetitle.find('.filetitletext');
-            filetitletext.attr('data-oldname', filetitletext.text()).prop('contenteditable', true).focus()
+            let filetitletexttext = filetitletext.text();
+            filetitletext.attr('data-oldname', filetitletexttext).prop('contenteditable', true).focus()
                 .on('blur', function () {
                     finishRenaming($(this));
 
@@ -424,7 +425,14 @@ function preparecard(item) {
 
             //https://stackoverflow.com/questions/6139107/programmatically-select-text-in-a-contenteditable-html-element
             let range = document.createRange();
-            range.selectNodeContents(filetitle.find('.filetitletext')[0]);
+            let filetitletextnode = filetitletext[0].childNodes[0];
+            if(filetitletexttext.includes('.')){
+                range.setStart(filetitletextnode,0);
+                range.setEnd(filetitletextnode,filetitletexttext.lastIndexOf('.'));
+            }else{
+                range.selectNodeContents(filetitletextnode);
+            }
+
             let sel = window.getSelection();
             sel.removeAllRanges();
             sel.addRange(range);
