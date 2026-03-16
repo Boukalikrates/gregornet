@@ -1,8 +1,9 @@
 function loadPage(n) {
     //for (let i = 0; i < filteredListdir.length; i++) {
-    if($('.mediaplayer').parents('.video-holder').length){
+    if($('#mediaplayer-video').parents('.video-holder').length){
 
-    $('.mediaplayer').detach().appendTo('.mediaplayer-container').addClass('reduced');
+            $('#mediaplayer-video').detach().prependTo('.mediaplayer');
+            $('.mediaplayer').addClass('reduced');
     }
     $(' .stream-holder').remove();
     $('.item, .itemph, .pagechip').remove();

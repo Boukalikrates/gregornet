@@ -172,12 +172,12 @@ function init() {
     })
 
 
-    $('#mediaplayer video').on('timeupdate', audioprogress).on('ended', audioended);
+    $('#mediaplayer-video').on('timeupdate', audioprogress).on('ended', audioended);
 
     $('#audioslider').change(function () {
-        let duration = $('#mediaplayer video').prop('duration');
+        let duration = $('#mediaplayer-video').prop('duration');
         let newTime = duration * $(this).val() / 100;
-        $('#mediaplayer video').prop('currentTime', newTime);
+        $('#mediaplayer-video').prop('currentTime', newTime);
     })
     $('#audio-hide-btn').click(function () {
         $('#mediaplayer').addClass('reduced')

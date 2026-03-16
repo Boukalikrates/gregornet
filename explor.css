@@ -674,6 +674,7 @@ button.pagenumber {
 } */
 
 .stream-image,
+.stream-holder #mediaplayer-video,
 .lore img,
 .markdown img {
     display: block;
@@ -901,13 +902,13 @@ li:hover .listaction {
 
 
 
-.mediaplayer video {
+#mediaplayer-video {
     display: none;
     background-color: black;
     transition: 200ms cubic-bezier(.4, 0, .2, 1);
 }
 
-.mediaplayer-container .mediaplayer video {
+.mediaplayer-container #mediaplayer-video {
 
     position: fixed;
     bottom: 0;
@@ -918,11 +919,11 @@ li:hover .listaction {
 }
 
 
-.mediaplayer.videoEnabled video {
+.mediaplayer.videoEnabled #mediaplayer-video {
     display: block;
 }
 
-.mediaplayer.reduced video {
+.mediaplayer.reduced #mediaplayer-video {
     left: 8px;
     bottom: 12px;
     width: 320px;
