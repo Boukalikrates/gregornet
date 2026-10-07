@@ -1,11 +1,11 @@
 
 function audioplay(e) {
-    if ($('#mediaplayer').hasClass('hidden')) {
+    if ($('#mediaplayer').hasClass('inactive')) {
 
-        $('#mediaplayer').removeClass('hidden reduced');
+        $('#mediaplayer').removeClass('inactive reduced');
     }
     let audio = $('#mediaplayer-video');
-    let button = $('#audio-play-btn');
+    let button = $('#media-play-btn');
     let selected = false;
     let entry = false
     if (typeof e == typeof "string") {
@@ -42,7 +42,7 @@ function audioplay(e) {
 
     if (entry) {
         audio.prop('src', playlistPath + encodeURIComponent(entry.name)).attr('data-np', entry.random).attr('data-np-index', playlist.indexOf(entry));
-        $('#audio-title').text(entry.tags.title ? (entry.tags.artist ? entry.tags.artist + ' - ' + entry.tags.title : entry.tags.title) : entry.name);
+        $('#media-title').text(entry.tags.title ? (entry.tags.artist ? entry.tags.artist + ' - ' + entry.tags.title : entry.tags.title) : entry.name);
         
 
 
@@ -83,26 +83,40 @@ function audioplay(e) {
 function findAndMarkNowPlaying(){
     let oldNowPlaying = $('.now-playing');
     oldNowPlaying.removeClass('now-playing').find('.play-button i').text('play_arrow');
-    oldNowPlaying.parent().removeClass('previewing');
+    let oldNowParent = oldNowPlaying.parent();
 
-    if($('#mediaplayer-video').attr('data-np')){{
+    if($('#mediaplayer-video').attr('data-np')){
         let item = $('.mdl-cell[data-random=' + $('#mediaplayer-video').attr('data-np') + ']');
-        if (item){
+        let itemholder = item.next('.stream-holder');
+        if (item.length){
+            
             item.children(' .card-audio').addClass('now-playing').find('.play-button i').text('pause');
             
             if(item.hasClass('previewing')){
-                $('#mediaplayer-video').detach().prependTo(item.next('.stream-holder'));
+                // $('#mediaplayer-video').detach().prependTo(item.next('.stream-holder'));
 
-                $('.mediaplayer').removeClass('reduced');
+                $('.mediaplayer').addClass('reduced inline').css('transform','translateY('+itemholder.offset().top+'px)');
+            }else if(oldNowParent.hasClass('previewing')){
+                let oldtarget = $('html').scrollTop() - oldNowParent.next('.stream-holder').offset().top;
+                oldNowParent.removeClass('previewing');
+                item.addClass('previewing');
+                calculateGridRow(true);
+                $('html').scrollTop(oldtarget + itemholder.offset().top);
+                $('.mediaplayer').addClass('reduced inline').css('transform','translateY('+itemholder.offset().top+'px)');
             }else{
-
-                $('#mediaplayer-video').detach().prependTo('.mediaplayer');
+                $('.mediaplayer').removeClass('inline').css('transform','');
+                oldNowParent.removeClass('previewing');
+                // $('#mediaplayer-video').detach().prependTo('.mediaplayer');
             }
         } else{
+            $('.mediaplayer').removeClass('inline').css('transform','');
             $('.previewing .card-audio').parent().removeClass('previewing');
-            $('#mediaplayer-video').detach().prependTo('.mediaplayer');
+            // $('#mediaplayer-video').detach().prependTo('.mediaplayer');
         } 
-    }}
+    }else{
+
+    oldNowParent.removeClass('previewing');
+    }
 }
 function audioprogress(e) {
     let currentTime = $(this).prop('currentTime');
@@ -111,15 +125,18 @@ function audioprogress(e) {
     if ($('#audioslider:focus').length == 0)
         $('#audioslider')[0].MaterialSlider.change(100 * currentTime / duration);
     if (currentTime == 0 && $(this).prop('paused')) {
-        $('#audio-output').text('--:--')
+        $('#media-output').text('--:--')
     } else {
-        $('#audio-output').text(isNaN(duration) ? humantime(currentTime) : humantime(currentTime) + ' / ' + humantime(duration))
+        $('#media-output').text(isNaN(duration) ? humantime(currentTime) : humantime(currentTime) + ' / ' + humantime(duration))
     }
 
-    if ($(this).prop('videoWidth') && $(this).prop('videoHeight') && $(this).attr('data-np')) {
-        $('#mediaplayer').addClass('videoEnabled');
-    } else {
-        $('#mediaplayer').removeClass('videoEnabled');
+    if(currentTime > 0){
+        if ($(this).prop('videoWidth') && $(this).prop('videoHeight') && $(this).attr('data-np')) {
+            $('#mediaplayer').addClass('videoEnabled');
+        } else {
+            $('#mediaplayer').removeClass('videoEnabled').addClass('reduced');
+            document.exitFullscreen();
+        }
     }
 
     if ('mediaSession' in navigator) {
@@ -147,11 +164,11 @@ function audioended(e) {
 function audiostop() {
     let audio = $('#mediaplayer-video');
     audio.trigger('pause').prop('currentTime', 0).attr('data-np', '').attr('data-np-index', '-1');
-    $('#audio-play-btn').attr('title', 'Play').children('.material-icons').text('play_arrow');
-    $('#audio-output').text('--:--');
-    $('#audio-title').text('Stopped');
+    $('#media-play-btn').attr('title', 'Play').children('.material-icons').text('play_arrow');
+    $('#media-output').text('--:--');
+    $('#media-title').text('Stopped');
 
-    $('#mediaplayer').removeClass('videoEnabled').addClass('hidden');
+    $('#mediaplayer').removeClass('videoEnabled').addClass('inactive');
 
     findAndMarkNowPlaying();
 
@@ -159,32 +176,13 @@ function audiostop() {
         navigator.mediaSession.playbackState = 'none';
         navigator.mediaSession.metadata = new MediaMetadata();
     }
+    document.exitFullscreen();
 }
 function audionext() {
     let audio = $('#mediaplayer-video');
     audioplay(+audio.attr('data-np-index') + 1);
-    // let thiscard = $('.card-audio[data-np=' + audio.attr('data-np') + ']')
-    // // audiostop();
-    // if (thiscard.length == 0) {
-    //     audioplay();
-    // } else {
-    //     let nextcard = thiscard.parent().nextAll().find('.card-audio').first();
-    //     if (nextcard.length > 0) {
-    //         audioplay(nextcard);
-    //     }
-    // }
 }
 function audioprevious() {
     let audio = $('#mediaplayer-video');
     audioplay(+audio.attr('data-np-index') - (audio.prop('currentTime') < 5 ? 1 : 0));
-    // let thiscard = $('.card-audio[data-np=' + audio.attr('data-np') + ']')
-    // audiostop();
-    // if (thiscard.length == 0) {
-    //     audioplay();
-    // } else {
-    //     let nextcard = thiscard.parent().prevAll().find('.card-audio').last();
-    //     if (nextcard.length > 0) {
-    //         audioplay(nextcard);
-    //     }
-    // }
 }

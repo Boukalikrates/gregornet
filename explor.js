@@ -179,16 +179,21 @@ function init() {
         let newTime = duration * $(this).val() / 100;
         $('#mediaplayer-video').prop('currentTime', newTime);
     })
-    $('#audio-hide-btn').click(function () {
-        $('#mediaplayer').addClass('reduced')
+    $('#media-fullscreen').click(function () {
+        $('#mediaplayer').hasClass('reduced')?$('#mediaplayer')[0].requestFullscreen():document.exitFullscreen();
+
+        
+        $('#mediaplayer').toggleClass('reduced').removeClass('inline').css('transform','');
+        $('.previewing').removeClass('previewing');
+        // findAndMarkNowPlaying();
     })
-    $('#audio-show-btn').click(function () {
+    $('#media-show-btn').click(function () {
         $('#mediaplayer').removeClass('reduced')
     })
-    $('#audio-play-btn').click(audioplay)
-    $('#audio-stop-btn').click(audiostop)
-    $('#audio-next-btn').click(audionext)
-    $('#audio-previous-btn').click(audioprevious)
+    $('#media-play-btn').click(audioplay)
+    $('#media-stop-btn').click(audiostop)
+    $('#media-next-btn').click(audionext)
+    $('#media-previous-btn').click(audioprevious)
 
 
     $('.page-reload-btn').click(loadFolder)
@@ -321,7 +326,7 @@ function loadFolder() {
         $('.settings-tabs>.mdl-tabs__tab-bar, .back-button').show()
         // $('.toolbar').hide()
         if (!$('body').hasClass('settings-page')) {
-            $('.settings-tabs>.mdl-tabs__panel, .settings-tabs>.mdl-tabs__tab-bar>.mdl-tabs__tab').removeClass('is-active');
+            $('.settings-tabs>.mdl-tabs__panel, .settings-tabs>.mdl-tabs__tab-bar>.mdl-tabs__tab').removeClass('is-active hidden');
             $('.settings-tabs .settings-local').addClass('is-active');
         } else {
         }

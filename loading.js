@@ -2,7 +2,7 @@ function loadPage(n) {
     //for (let i = 0; i < filteredListdir.length; i++) {
     if($('#mediaplayer-video').parents('.video-holder').length){
 
-            $('#mediaplayer-video').detach().prependTo('.mediaplayer');
+            // $('#mediaplayer-video').detach().prependTo('.mediaplayer');
             $('.mediaplayer').addClass('reduced');
     }
     $(' .stream-holder').remove();
@@ -457,7 +457,7 @@ function filePreview(e) {
     if ($(this).parents().filter('.item.previewing').length) {
         // $('.previewing').removeClass('previewing').children('.stream-holder')[0].style.gridRow = '';
         $('.previewing').removeClass('previewing').next('.stream-holder')[0].style.gridRow = '';
-        $('.mediaplayer').detach().appendTo('.mediaplayer-container');
+        // $('.mediaplayer').detach().appendTo('.mediaplayer-container');
         return;
     }
     $('.previewing').removeClass('previewing');
@@ -471,7 +471,7 @@ function filePreview(e) {
         audioplay($(this).parents('.mdl-cell').attr('data-random'));
     }
 }
-function calculateGridRow() {
+function calculateGridRow(doNotMarkNowPlaying=false) {
     // determine row to put element in
     let item = $('.previewing');
     if (item.length == 0) return;
@@ -485,10 +485,18 @@ function calculateGridRow() {
             count += 1;
         }
     });
-    console.log(count)
+
+    
+    
     // item.children('.stream-holder').css('grid-row',Math.ceil(count/columnCount)+1);
     item.next('.stream-holder')[0].style.gridRow = Math.ceil(count / columnCount) + 1;
     // item.children('.stream-holder')[0].style.gridRow = Math.ceil(count / columnCount) + 1;
+
+    let mediaplayer = $('.mediaplayer');
+    if(mediaplayer.hasClass('inline')){
+        let itemholder = item.next('.stream-holder');
+        mediaplayer.css('transform','translateY('+itemholder.offset().top+'px)');
+    }
 }
 function finishRenaming(obj, rejectChanges = false) {
     let filetitle = obj.parent();

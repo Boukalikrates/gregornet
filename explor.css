@@ -704,6 +704,7 @@ body.stickyheader-sometimes.mode-list .markdown img {
 }
 
 .video-holder{
+    height: 540px;
     display: none;
 }
 
@@ -809,7 +810,7 @@ li:hover .listaction {
     transform: translate(-12px, -12px) rotate(-180.01deg);
 }
 
-/* .mode-stream .mediaplayer.reduced:not(:hover) {
+/* .mode-stream .mediaplayer.videoEnabled.reduced:not(:hover) {
     opacity: 0.1;
 }
 
@@ -826,6 +827,8 @@ li:hover .listaction {
     transition: 200ms cubic-bezier(.4, 0, .2, 1);
     z-index: 100;
 }
+
+
 .mediaplayer-container .mediaplayer {
     background-color: rgb(245, 245, 245);
     color: black;
@@ -840,17 +843,43 @@ li:hover .listaction {
     z-index: 100;
 }
 
+
+.mediaplayer-container .mediaplayer.videoEnabled {
+    height: 100vh;
+}
+.mediaplayer-container .mediaplayer.inactive{
+    /* bottom: -100vh; */
+    height: 0;
+}
+
 .video-holder .mediaplayer {
     max-height: 100vh;
     overflow: hidden;
 }
 
-
-.mediaplayer.reduced {
-    height: 4px;
+.mediaplayer:not(.inline):not(.reduced){
+    transform: none !important;
 }
 
-#audio-show-btn {
+.mediaplayer-container .mediaplayer.videoEnabled.reduced {
+    left: 8px;
+    bottom: 12px;
+    width: 320px;
+    height: 180px;
+}
+.mediaplayer-container:hover .mediaplayer.videoEnabled.reduced {
+    width: 640px;
+    height: 360px;
+}
+
+.mediaplayer-container .mediaplayer.videoEnabled.inline.reduced {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 540px;
+}
+#media-show-btn {
     position: fixed;
     bottom: -56px;
     left: 0;
@@ -858,23 +887,19 @@ li:hover .listaction {
     transition: 200ms cubic-bezier(.4, 0, .2, 1);
 }
 
-.mediaplayer.reduced #audio-show-btn {
+.mediaplayer.videoEnabled.reduced #media-show-btn {
     bottom: 4px;
 }
 
-.video-holder #audio-hide-btn {
+.video-holder #media-hide-btn {
     display: none;
 }
-#audioprogress {
+.audioprogress {
     width: 100%;
     transition: 200ms cubic-bezier(.4, 0, .2, 1);
 }
 
 
-
-.mediaplayer.reduced .mdl-slider__container {
-    bottom: -7px;
-}
 
 .mediaplayer .mdl-slider__container:hover,
 .mediaplayer .mdl-slider__container:active {
@@ -909,36 +934,44 @@ li:hover .listaction {
 }
 
 .mediaplayer-container #mediaplayer-video {
-
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    /* height: 100%; */
-    height: 100vh;
 }
 
 
 .mediaplayer.videoEnabled #mediaplayer-video {
     display: block;
+    width: 100%;
+    height: 100%;
 }
 
-.mediaplayer.reduced #mediaplayer-video {
-    left: 8px;
+.mediaplayer.videoEnabled.reduced #mediaplayer-video {
+    /* left: 8px;
     bottom: 12px;
     width: 320px;
-    height: 180px;
+    height: 180px; */
+}
+
+.mediaplayer.videoEnabled.reduced:not(:hover) .mdl-progress,
+.mediaplayer.videoEnabled.reduced:not(:hover) .mdl-slider__container,
+.mediaplayer.videoEnabled.reduced:not(:hover) .toolbar {
+    opacity: 0;
 }
 
 
-
+.mediaplayer.videoEnabled .audioprogress {
+    height: 4px;
+    position: absolute;
+    bottom: 56px;
+    width: 100%;
+}
 
 .mediaplayer.videoEnabled .toolbar {
     background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    position: relative;
+    color: white;  
+    height: 32px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
-
 .mediaplayer-container .mediaplayer .toolbar>div {
     margin-bottom: 100px;
 }
@@ -955,7 +988,7 @@ li:hover .listaction {
     bottom: 0;
 }
 
-.video-holder .mediaplayer  #audioprogress {
+.video-holder .mediaplayer  .audioprogress {
     width: 100%;
     position: absolute;
     bottom: 56px;
@@ -972,10 +1005,10 @@ li:hover .listaction {
     }
 }
 
-/* #audioprogress:hover {
+/* .audioprogress:hover {
 } */
 
-#audio-output {
+#media-output {
     font-weight: bold;
     white-space: nowrap;
     font-size: 1.25em;
@@ -1152,17 +1185,17 @@ li:hover .listaction {
     }
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 600px) {
     .toolbar .toolbar-center {
         order: 5;
-        flex-basis: 1024px;
+        flex-basis: 600px;
     }
 
     .mediaplayer .toolbar .toolbar-center {
-        /* margin-top: -12px; */
+         /* margin-top: -12px; 
         order: -5;
-        flex-basis: 1024px;
-        margin-bottom: 0;
+        flex-basis: 600px;
+        margin-bottom: 0; */
     }
 
     .mediaplayer .mdl-slider__container {
