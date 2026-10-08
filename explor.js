@@ -6,6 +6,7 @@ let config = {};
 let pathConfig = {};
 let cache = {};
 let loadingcard = 0;
+let cachedListdir = {}
 
 const themeColors = { //
     'red': 'D32F2F',
@@ -783,7 +784,7 @@ function sort(mode, reverse) {
 
         }
     });
-
+    cachedListdir[location.pathname]=listdir;
     loadPage();
 
 }
@@ -809,8 +810,28 @@ function closestli(reverse) {
     let proximity = reverse ? -Infinity : Infinity;
     let closest;
     if ($('.stream-loading').length == 0 && !reverse && $('html').scrollTop() > $('.mdl-layout').height() - $('html').height() - 10) {
-        if (+pathStorage('page') >= Math.ceil(listdir.length / config.pageSize) - 1) {
-            showSnackbar('end of folder')
+        if (pathStorage('page') === undefined || +pathStorage('page') >= Math.ceil(listdir.length / config.pageSize) - 1) {
+            let snackbarText = $('.mdl-snackbar__text');
+            if($('.mdl-snackbar--active').length){
+                switch(snackbarText.text()){
+                    case 'end of folder':
+                        snackbarText.text('press twice more to go to next folder');
+                        break;
+                    case 'press twice more to go to next folder':
+                        snackbarText.text('press once more to go to next folder');
+                        break;
+                    case 'press once more to go to next folder':
+                        snackbarText.text('traversing....');
+                        traverse();
+                        break;
+                    case 'traversing....':
+                        // that impatient folk must wait until next folder loads
+                        // let's do nothing
+                        break;
+                    default:
+                    showSnackbar('end of folder');
+                }
+            }else showSnackbar('end of folder');
         } else {
             loadPage(+pathStorage('page') + 1)
         }
@@ -836,6 +857,24 @@ function closestli(reverse) {
     }
 
     return closest;
+}
+
+function traverse(reverse){
+    let pathtree = location.pathname.split('/');
+    pathtree.pop();
+    let current = decodeURIComponent(pathtree.pop());
+    let oneUp=pathtree.join('/')+'/';
+    let newPath = oneUp;
+    if(cachedListdir[oneUp]){
+        let findIndex = cachedListdir[oneUp].findIndex(x => x.name == current);
+        if(-1 < findIndex && findIndex+1 < cachedListdir[oneUp].length && cachedListdir[oneUp][findIndex+1] && cachedListdir[oneUp][findIndex+1].name) newPath = oneUp+encodeURIComponent(cachedListdir[oneUp][findIndex+1].name)+'/';
+
+    }
+    
+    history.pushState({}, '', newPath);
+
+    setTimeout(loadFolder, 10)
+    // location.pathname=newPath;
 }
 
 
