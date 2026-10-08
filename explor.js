@@ -809,7 +809,7 @@ function closestli(reverse) {
     let proximity = reverse ? -Infinity : Infinity;
     let closest;
     if ($('.stream-loading').length == 0 && !reverse && $('html').scrollTop() > $('.mdl-layout').height() - $('html').height() - 10) {
-        if (+pathStorage('page') == Math.ceil(listdir.length / config.pageSize) - 1) {
+        if (+pathStorage('page') >= Math.ceil(listdir.length / config.pageSize) - 1) {
             showSnackbar('end of folder')
         } else {
             loadPage(+pathStorage('page') + 1)
