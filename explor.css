@@ -993,7 +993,12 @@ li:hover .listaction {
     position: absolute;
     bottom: 56px;
 }
-
+#media-fullscreen{
+    display: none;
+}
+.videoEnabled #media-fullscreen{
+    display: inline-block;
+}
 
 @keyframes dance {
     0% {
