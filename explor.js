@@ -196,6 +196,16 @@ function init() {
     $('#media-next-btn').click(audionext)
     $('#media-previous-btn').click(audioprevious)
 
+    $('#media-playmode-btn').click(function () {
+        let radio = $('.playmode-radio:checked');
+        radio.parentsUntil('li').removeClass('is-checked');
+        let nextLi = radio.parentsUntil('ul').last().next()
+        if(nextLi.length == 0) nextLi = radio.parentsUntil('ul').last().siblings().first();
+        nextLi.find('input').prop("checked", true);
+        togglePlayMode();
+        // $(this).attr('title',nextLi.find('input').attr('title')).find('.material-icons').text(nextLi.find('.material-icons').text());
+    })
+
 
     $('.page-reload-btn').click(loadFolder)
     $('.new-folder').click(newFolder)
@@ -712,7 +722,7 @@ function toggleStickyHeader() {
 }
 
 function togglePlayMode() {
-    let currentMode = $('.playmode-radio:checked').val()
+    let currentMode = $('.playmode-radio:checked').val();
     if (!currentMode) {
         {
             // If none of the radios is selected, take information from localStorage.
@@ -738,6 +748,10 @@ function togglePlayMode() {
         default:
             $('#playmode-default-radio').prop('checked', true).parent().addClass('is-checked');
     }
+
+
+    let modeLabel = $('.playmode-radio:checked').parent();
+    $('#media-playmode-btn').attr('title',modeLabel.find('input').attr('title')).find('.material-icons').text(modeLabel.find('.material-icons').text());
 }
 
 function sort(mode, reverse) {

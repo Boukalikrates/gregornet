@@ -289,40 +289,60 @@
                                     <label
                                         class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
                                         for="playmode-default-radio">
-                                        <input type="radio" id="playmode-default-radio"
-                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
-                                            value="default">
-                                        <span class="mdl-radio__label">Default</span>
-                                    </label>
-                                </li>
-
-                                <li class="mdl-list__item">
-                                    <label
-                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
-                                        for="playmode-loop-radio">
-                                        <input type="radio" id="playmode-loop-radio"
-                                            class="mdl-radio__button playmode-radio" name="playmode-radio" value="loop">
-                                        <span class="mdl-radio__label">Loop</span>
+                                        <input type="radio" 
+                                            id="playmode-default-radio"
+                                            class="mdl-radio__button playmode-radio" 
+                                            name="playmode-radio"
+                                            value="default"
+                                            title="Default">
+                                        <span class="mdl-radio__label">
+                                        <i class="material-icons">arrow_forward</i>
+                                        Default</span>
                                     </label>
                                 </li>
                                 <li class="mdl-list__item">
                                     <label
                                         class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
                                         for="playmode-single-radio">
-                                        <input type="radio" id="playmode-single-radio"
-                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
-                                            value="single">
-                                        <span class="mdl-radio__label">Single track</span>
+                                        <input type="radio" 
+                                            id="playmode-single-radio"
+                                            class="mdl-radio__button playmode-radio" 
+                                            name="playmode-radio"
+                                            value="single"
+                                            title="Single track">
+                                        <span class="mdl-radio__label">
+                                        <i class="material-icons">looks_one</i>
+                                        Single track</span>
+                                    </label>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <label
+                                        class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
+                                        for="playmode-loop-radio">
+                                        <input type="radio" 
+                                            id="playmode-loop-radio"
+                                            class="mdl-radio__button playmode-radio"
+                                            name="playmode-radio" 
+                                            value="loop"
+                                            title="Repeat">
+                                        <span class="mdl-radio__label">
+                                        <i class="material-icons">repeat</i>
+                                        Repeat</span>
                                     </label>
                                 </li>
                                 <li class="mdl-list__item">
                                     <label
                                         class="mdl-list__item-primary-content mdl-radio mdl-js-radio mdl-js-ripple-effect"
                                         for="playmode-loopsingle-radio">
-                                        <input type="radio" id="playmode-loopsingle-radio"
-                                            class="mdl-radio__button playmode-radio" name="playmode-radio"
-                                            value="loopsingle">
-                                        <span class="mdl-radio__label">Loop single track</span>
+                                        <input type="radio" 
+                                        id="playmode-loopsingle-radio"
+                                            class="mdl-radio__button playmode-radio" 
+                                            name="playmode-radio"
+                                            value="loopsingle"
+                                            title="Repeat single track">
+                                        <span class="mdl-radio__label">
+                                        <i class="material-icons">repeat_one</i>
+                                        Repeat single track</span>
                                     </label>
                                 </li>
                             </ul>
@@ -644,6 +664,9 @@
                     <span class="mdl-switch__label">Autoplay</span>
                     </label> -->
                         <output id="media-output">--:--</output>
+                        <button id="media-playmode-btn" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">arrow_forward</i>
+                        </button>
                         <button id="media-fullscreen" class="mdl-button mdl-js-button mdl-button--icon">
                             <i class="material-icons">fullscreen</i>
                         </button>
