@@ -159,7 +159,6 @@ function audioended(e) {
             audionext();
 
     }
-    $('#mediaplayer').removeClass('videoEnabled');
 }
 function audiostop() {
     let audio = $('#mediaplayer-video');

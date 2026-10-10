@@ -460,6 +460,7 @@ function filePreview(e) {
         // $('.mediaplayer').detach().appendTo('.mediaplayer-container');
         return;
     }
+    
     $('.previewing').removeClass('previewing');
     let item = $(this).parents().filter('.item')
     if(item.next('.stream-holder').length){
@@ -469,6 +470,9 @@ function filePreview(e) {
     }
     if(item.children('.mdl-card').hasClass('card-audio')){
         audioplay($(this).parents('.mdl-cell').attr('data-random'));
+    }else if($('.inline').length){
+        $('.inline').removeClass('inline').css('transform','');
+        $('#mediaplayer-video').prop('currentTime') < 3 && audiostop();
     }
 }
 function calculateGridRow(doNotMarkNowPlaying=false) {
